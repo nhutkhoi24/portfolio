@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="work-meta">
         <h3>${project.title}</h3>
         <p>${project.description}</p>
-        <a href="${project.link}" target="_blank" rel="noopener noreferrer">View project ↗</a>
+        <a class="resource-link" href="${project.link}" target="_blank" rel="noopener noreferrer">Open project ↗</a>
       </div>
     </article>
   `).join("");
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     certificatesList.innerHTML = cvData.certificates.map((certificate) => `
       <article class="credential-item">
         <div><h3>${certificate.title}</h3><p>${certificate.organization} · ${certificate.date}</p></div>
-        <a href="${certificate.link}" target="_blank" rel="noopener noreferrer">View ↗</a>
+        <a class="resource-link" href="${certificate.link}" target="_blank" rel="noopener noreferrer">Open certificate ↗</a>
       </article>
     `).join("");
   }
