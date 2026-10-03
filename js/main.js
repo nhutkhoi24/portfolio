@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const worksGrid = document.getElementById("works-grid");
-  if (!worksGrid || !window.cvData) return;
+  if (!worksGrid || typeof cvData === "undefined") return;
 
   worksGrid.innerHTML = cvData.projects.map((project, index) => `
     <article class="work-card">
