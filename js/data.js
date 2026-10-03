@@ -69,6 +69,10 @@ const cvData = {
       ],
     },
     {
+      category: "Security Practice",
+      items: ["Database Security", "Pentest Automation", "System Administration"],
+    },
+    {
       category: "Networking",
       items: ["TCP", "IDS", "Router", "Switch", "Firewall", "..."],
     },
@@ -102,8 +106,9 @@ const cvData = {
     },
     {
       title: "Cybersecurity Student Contest",
-      event: "Participant 2025",
-      description: "Competed in student cybersecurity contest",
+      event: "Participant · Top 120 · 2026",
+      description: "Selected among the top 120 participants in the 2026 cybersecurity student contest.",
+      link: "https://github.com/nhutkhoi24",
     },
     {
       title: "F Hacker Participant",
@@ -128,6 +133,11 @@ const cvData = {
       title: "Attack Simulation System And Common Types Of Attacks",
       description: "identify common types of cyber attacks nowadays",
       link: "https://youtube.com/playlist?list=PLmktKq-DnS-kgUVWEdMnJlx8fc_sLFnRF&si=3-IWzEMHNOgRG34E",
+    },
+    {
+      title: "UniForge",
+      description: "A live project exploring product building, collaboration and modern web delivery.",
+      link: "https://uniforge.vercel.app",
     },
   ],
   goals: {
