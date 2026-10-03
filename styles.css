@@ -3,6 +3,7 @@
 html { scroll-behavior:smooth; }
 body { background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.5; padding:0; }
 a { color:inherit; text-decoration:none; }
+img { filter:none !important; }
 .dot-grid { position:fixed; inset:0; z-index:-1; background-image:radial-gradient(#d9d7d2 1.25px, transparent 1.25px); background-size:27px 27px; opacity:.55; }
 .site-shell { width:100%; min-height:100vh; margin:0; background:var(--ink); color:#fff; overflow:hidden; }
 .site-header { height:72px; display:flex; align-items:center; gap:34px; padding:0 30px; border-bottom:1px solid var(--line); }

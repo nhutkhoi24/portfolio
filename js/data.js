@@ -12,7 +12,7 @@ const cvData = {
     interests: [
       "Coding, Music and Song, Football,..."
     ],
-    profileImage: "image\nhutkhoi2.jpg",
+    profileImage: "image/nhutkhoi2.jpg",
   },
   education: [
     {
