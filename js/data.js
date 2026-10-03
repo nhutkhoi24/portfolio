@@ -149,7 +149,7 @@ const cvData = {
     {
       title: "UniForge",
       description: "A live project exploring product building, collaboration and modern web delivery.",
-      link: "https://uniforge.vercel.app",
+      link: "https://uniforge-platform.vercel.app",
     },
   ],
   goals: {
