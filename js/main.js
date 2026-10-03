@@ -172,29 +172,4 @@ document.addEventListener("DOMContentLoaded", () => {
   window.portfolioApp = new TabManager();
 });
 
-const container = document.getElementById("skills-container");
-
-cvData.skills.forEach((skill) => {
-  const group = document.createElement("div");
-  group.className = "skill-group";
-
-  const title = document.createElement("span");
-  title.className = "skill-category-title";
-  title.textContent = skill.category;
-
-  const tagsWrapper = document.createElement("div");
-  tagsWrapper.className = "tags-wrapper";
-
-  skill.items.forEach((item) => {
-    const tag = document.createElement("span");
-    tag.className = "skill-tag";
-    tag.textContent = item;
-    tagsWrapper.appendChild(tag);
-  });
-
-  group.appendChild(title);
-  group.appendChild(tagsWrapper);
-  container.appendChild(group);
-});
-
 // Khoiha

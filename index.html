@@ -4,9 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hà Nhựt Khôi - Portfolio</title>
+  <meta name="description" content="Portfolio của Hà Nhựt Khôi — Information Assurance student và aspiring SOC Analyst." />
+  <title>Hà Nhựt Khôi — Cybersecurity Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 
 <body>
@@ -21,12 +24,12 @@
       <div class="header-content">
         <div class="header-left">
           <button class="profile-btn" title="Hà Nhựt Khôi - Profile">
-            <img src="image\nhutkhoi3.png" alt="Hà Nhựt Khôi" class="profile-btn-img" />
-            <span class="profile-btn-text">profile</span>
+            <img src="image/nhutkhoi3.png" alt="Hà Nhựt Khôi" class="profile-btn-img" />
+            <span class="profile-btn-text">open profile</span>
           </button>
         </div>
-        <a href="cv\CV_HaNhutKhoi.pdf" class="download-btn" download>
-          <span>Download CV</span>
+        <a href="cv/CV_HaNhutKhoi.pdf" class="download-btn" download>
+          <span>Download CV</span><span class="btn-arrow">↗</span>
         </a>
       </div>
     </div>
@@ -37,34 +40,41 @@
       <section class="hero-section">
         <div class="hero-grid">
           <aside class="profile-image-card">
+            <span class="image-label">/ identity_01</span>
             <div class="profile-frame">
-              <img src="image\nhutkhoi.png" alt="Hà Nhựt Khôi" class="profile-img" />
+              <img src="image/nhutkhoi.png" alt="Hà Nhựt Khôi" class="profile-img" />
             </div>
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
           </aside>
 
           <article class="about-card-new">
+            <div class="eyebrow"><span class="status-dot"></span> available for opportunities</div>
             <h1 class="about-title">
-              About <span class="highlight-red">Me</span>
+              Securing the <span class="highlight-red">digital</span> world.
             </h1>
             <p class="about-description">
-              As a student majoring in Information Assurance at FPT
-              University, I constantly explore and learn about system security
-              as well as analyze and detect cyber attacks.
+              Xin chào, mình là <strong>Hà Nhựt Khôi</strong> — Information Assurance student tại FPT University, tập trung vào malware analysis, reverse engineering và network defense.
             </p>
             <p class="about-description">
-              My arsenal includes cutting-edge technologies and security
-              expertise. I transform ideas into reality, crafting security
-              solutions that leave an indelible mark on the cybersecurity
-              landscape.
+              Mình biến những câu hỏi khó về hệ thống thành insight rõ ràng, actionable và an toàn hơn.
             </p>
             <div class="tech-stack">
-              <span class="tech-badge">Reversing Engineering</span>
+              <span class="tech-badge">Reverse Engineering</span>
               <span class="tech-badge">Malware Analyst</span>
               <span class="tech-badge">Bruteforce Attack</span>
               <span class="tech-badge">Exploit Engineering</span>
             </div>
-            <button class="btn-explore" data-tab="contact">Contact Me</button>
+            <div class="hero-actions">
+              <button class="btn-explore" data-tab="contact">Let's connect <span>↗</span></button>
+              <span class="scroll-hint">scroll to explore ↓</span>
+            </div>
           </article>
+        </div>
+        <div class="hero-metrics" aria-label="Quick facts">
+          <div><strong>03+</strong><span>security projects</span></div>
+          <div><strong>2025</strong><span>F Hacker · third prize</span></div>
+          <div><strong>24/7</strong><span>curiosity mode</span></div>
         </div>
       </section>
       <nav class="tab-navigation">
@@ -72,30 +82,30 @@
         <button class="tab-btn" data-tab="skills">Skills</button>
         <button class="tab-btn" data-tab="education">Education</button>
         <button class="tab-btn" data-tab="projects">Projects</button>
+        <button class="tab-btn" data-tab="achievements">Achievements</button>
+        <button class="tab-btn" data-tab="contact">Contact</button>
       </nav>
 
       <section class="tab-content">
         <div class="tab-pane active" id="about">
+          <div class="section-heading"><span class="section-kicker">01 / overview</span><h2>Built with intent.</h2></div>
           <div class="card-grid">
             <div class="feature-card">
               <h4>Security Focus</h4>
               <p>
-                Specializing in malware analysis, reverse engineering, and
-                network security.
+                Malware analysis, reverse engineering và network security là sân chơi mình muốn đào sâu.
               </p>
             </div>
             <div class="feature-card">
               <h4>Career Goal</h4>
               <p>
-                Aiming to become a SOC Analyst and contribute to digital
-                security.
+                Trở thành SOC Analyst có khả năng nhìn thấy tín hiệu giữa rất nhiều noise.
               </p>
             </div>
             <div class="feature-card">
               <h4>Continuous Learning</h4>
               <p>
-                Hands-on experience with industry tools and cybersecurity
-                research.
+                Luôn học bằng cách build, break, document — rồi build tốt hơn.
               </p>
             </div>
           </div>
@@ -168,7 +178,7 @@
       <button class="profile-modal-close" id="closeProfileModal">&times;</button>
       <div class="profile-modal-body">
         <div class="profile-modal-image">
-          <img src="image\nhutkhoi2.jpg" alt="Hà Nhựt Khôi" />
+          <img src="image/nhutkhoi2.jpg" alt="Hà Nhựt Khôi" />
         </div>
         <div class="profile-modal-info">
           <h2 id="profileName"></h2>
@@ -192,8 +202,8 @@
     </div>
   </div>
 
-  <script src="js\data.js"></script>
-  <script src="js\main.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>
