@@ -1,210 +1,79 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio của Hà Nhựt Khôi — Information Assurance student và aspiring SOC Analyst." />
+  <meta name="description" content="Hà Nhựt Khôi — Information Assurance student and aspiring SOC Analyst." />
   <title>Hà Nhựt Khôi — Cybersecurity Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <div class="background-animation">
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
-    <div class="glow glow-3"></div>
-  </div>
-
-  <header class="header">
-    <div class="container">
-      <div class="header-content">
-        <div class="header-left">
-          <button class="profile-btn" title="Hà Nhựt Khôi - Profile">
-            <img src="image/nhutkhoi3.png" alt="Hà Nhựt Khôi" class="profile-btn-img" />
-            <span class="profile-btn-text">open profile</span>
-          </button>
-        </div>
-        <a href="cv/CV_HaNhutKhoi.pdf" class="download-btn" download>
-          <span>Download CV</span><span class="btn-arrow">↗</span>
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <main class="main-content">
-    <div class="container">
-      <section class="hero-section">
-        <div class="hero-grid">
-          <aside class="profile-image-card">
-            <span class="image-label">/ identity_01</span>
-            <div class="profile-frame">
-              <img src="image/nhutkhoi.png" alt="Hà Nhựt Khôi" class="profile-img" />
-            </div>
-            <div class="orbit orbit-one"></div>
-            <div class="orbit orbit-two"></div>
-          </aside>
-
-          <article class="about-card-new">
-            <div class="eyebrow"><span class="status-dot"></span> available for opportunities</div>
-            <h1 class="about-title">
-              Securing the <span class="highlight-red">digital</span> world.
-            </h1>
-            <p class="about-description">
-              Xin chào, mình là <strong>Hà Nhựt Khôi</strong> — Information Assurance student tại FPT University, tập trung vào malware analysis, reverse engineering và network defense.
-            </p>
-            <p class="about-description">
-              Mình biến những câu hỏi khó về hệ thống thành insight rõ ràng, actionable và an toàn hơn.
-            </p>
-            <div class="tech-stack">
-              <span class="tech-badge">Reverse Engineering</span>
-              <span class="tech-badge">Malware Analyst</span>
-              <span class="tech-badge">Bruteforce Attack</span>
-              <span class="tech-badge">Exploit Engineering</span>
-            </div>
-            <div class="hero-actions">
-              <button class="btn-explore" data-tab="contact">Let's connect <span>↗</span></button>
-              <span class="scroll-hint">scroll to explore ↓</span>
-            </div>
-          </article>
-        </div>
-        <div class="hero-metrics" aria-label="Quick facts">
-          <div><strong>03+</strong><span>security projects</span></div>
-          <div><strong>2025</strong><span>F Hacker · third prize</span></div>
-          <div><strong>24/7</strong><span>curiosity mode</span></div>
-        </div>
-      </section>
-      <nav class="tab-navigation">
-        <button class="tab-btn active" data-tab="about">Overview</button>
-        <button class="tab-btn" data-tab="skills">Skills</button>
-        <button class="tab-btn" data-tab="education">Education</button>
-        <button class="tab-btn" data-tab="projects">Projects</button>
-        <button class="tab-btn" data-tab="achievements">Achievements</button>
-        <button class="tab-btn" data-tab="contact">Contact</button>
+  <div class="dot-grid" aria-hidden="true"></div>
+  <main class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Home">
+        <span class="brand-mark">⌁</span><span>NHỰT KHÔI</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="active" href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#works">Works</a>
+        <a href="#contact">Contact</a>
       </nav>
+      <a class="header-cta" href="cv/CV_HaNhutKhoi.pdf" download>Resume <span>↗</span></a>
+    </header>
 
-      <section class="tab-content">
-        <div class="tab-pane active" id="about">
-          <div class="section-heading"><span class="section-kicker">01 / overview</span><h2>Built with intent.</h2></div>
-          <div class="card-grid">
-            <div class="feature-card">
-              <h4>Security Focus</h4>
-              <p>
-                Malware analysis, reverse engineering và network security là sân chơi mình muốn đào sâu.
-              </p>
-            </div>
-            <div class="feature-card">
-              <h4>Career Goal</h4>
-              <p>
-                Trở thành SOC Analyst có khả năng nhìn thấy tín hiệu giữa rất nhiều noise.
-              </p>
-            </div>
-            <div class="feature-card">
-              <h4>Continuous Learning</h4>
-              <p>
-                Luôn học bằng cách build, break, document — rồi build tốt hơn.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-pane" id="skills">
-          <div id="skills-container"></div>
-        </div>
-
-        <div class="tab-pane" id="education">
-          <div class="education-container"></div>
-        </div>
-
-        <div class="tab-pane" id="projects">
-          <div class="projects-container"></div>
-        </div>
-
-        <div class="tab-pane" id="achievements">
-          <div class="achievements-container"></div>
-        </div>
-
-        <div class="tab-pane" id="contact">
-          <div class="contact-grid">
-            <div class="contact-info-card">
-              <h4>Secure Communication</h4>
-              <p>You can contact me through the safe channels below:</p>
-
-              <div class="contact-item">
-                <span class="contact-label">EMAIL:</span>
-                <span class="contact-value">khoihn.ce190080@gmail.com</span>
-              </div>
-              <div class="contact-item">
-                <span class="contact-label">PHONE:</span>
-                <span class="contact-value">079-257-7603</span>
-              </div>
-              <div class="contact-item">
-                <span class="contact-label">LOCATION:</span>
-                <span class="contact-value">Can Tho, Vietnam</span>
-              </div>
-            </div>
-
-            <div class="contact-form-card">
-              <h4>Direct Message</h4>
-              <p style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 20px;">
-                The system is ready to receive information from you.
-              </p>
-              <button class="btn-explore" style="width: 100%;"
-                onclick="window.location.href='mailto:khoihn.ce190080@gmail.com'">
-                Send Email Now
-              </button>
-              <button class="btn-explore" style="width: 100%; margin-top: 10px;" onclick="window.open('https://github.com/nhuthoi', '_blank')">View GitHub</button>
-            </div>
-          </div>
-        </div>
-
-    </div>
-    </section>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <p>© 2025 HÀ NHỰT KHÔI | Information Assurance Specialist</p>
-      <p class="footer-subtitle"></p>
-    </div>
-  </footer>
-
-  <!-- Profile Modal -->
-  <div class="profile-modal" id="profileModal">
-    <div class="profile-modal-content">
-      <button class="profile-modal-close" id="closeProfileModal">&times;</button>
-      <div class="profile-modal-body">
-        <div class="profile-modal-image">
-          <img src="image/nhutkhoi2.jpg" alt="Hà Nhựt Khôi" />
-        </div>
-        <div class="profile-modal-info">
-          <h2 id="profileName"></h2>
-          <p id="profileTitle" class="profile-title"></p>
-          <div class="profile-details">
-            <div class="profile-detail-item">
-              <span class="detail-label">Height:</span>
-              <span class="detail-value" id="profileHeight"></span>
-            </div>
-            <div class="profile-detail-item">
-              <span class="detail-label">Weight:</span>
-              <span class="detail-value" id="profileWeight"></span>
-            </div>
-            <div class="profile-detail-item">
-              <span class="detail-label">Interests:</span>
-              <div class="profile-interests" id="profileInterests"></div>
-            </div>
-          </div>
-        </div>
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> Information Assurance · Can Tho, VN</p>
+        <h1>Security<br /><em>with intent.</em></h1>
+        <p class="hero-intro">Hi, I’m <strong>Hà Nhựt Khôi</strong> — a cybersecurity student who turns complex threats into clear, resilient systems.</p>
+        <a class="text-link" href="#about">Explore profile <span>↘</span></a>
       </div>
-    </div>
-  </div>
+      <div class="hero-visual">
+        <div class="hero-image-wrap">
+          <img src="image/nhutkhoi.png" alt="Portrait of Hà Nhựt Khôi" />
+          <span class="image-index">01 / 04</span>
+        </div>
+        <div class="hero-note">“Find the signal<br />in the noise.”</div>
+        <div class="hero-accent accent-light"></div>
+        <div class="hero-accent accent-olive"></div>
+      </div>
+    </section>
 
+    <section class="content-section services-section" id="services">
+      <div class="section-topline"><span>01 — Capabilities</span><span>Selected focus</span></div>
+      <h2>My Services</h2>
+      <div class="services-grid">
+        <article class="service-card service-neutral"><span class="service-icon">⌁</span><h3>Malware<br />Analysis</h3><p>Understand behavior, structure and indicators to uncover what a threat is trying to do.</p><a href="#works">Learn more ↗</a></article>
+        <article class="service-card service-ochre"><span class="service-icon">◌</span><h3>Reverse<br />Engineering</h3><p>Break down binaries and systems with patience, curiosity and a defensive mindset.</p><a href="#works">Learn more ↗</a></article>
+        <article class="service-card service-sage"><span class="service-icon">✦</span><h3>Network<br />Defense</h3><p>Map the attack surface, spot anomalies and build stronger security foundations.</p><a href="#contact">Let's talk ↗</a></article>
+      </div>
+    </section>
+
+    <section class="content-section about-section" id="about">
+      <div class="about-photo"><img src="image/nhutkhoi2.jpg" alt="Hà Nhựt Khôi in black and white" /><span>02 / about me</span></div>
+      <div class="about-copy"><div class="section-topline"><span>02 — The person behind the work</span></div><h2>About<br /><em>Me</em></h2><p>As an Information Assurance student at FPT University, I spend my time exploring system security, analyzing cyber attacks and building the habit of documenting what I learn.</p><p>My goal is to become a SOC Analyst who can connect technical depth with calm, practical decisions.</p><div class="mini-nav"><a class="selected" href="#about">Profile</a><a href="#services">Skills</a><a href="#works">Experience</a></div><div class="about-details"><span><b>Education</b>FPT University, Can Tho</span><span><b>Goal</b>Become a SOC Analyst</span><span><b>Languages</b>English · Japanese</span></div></div>
+    </section>
+
+    <section class="content-section works-section" id="works">
+      <div class="section-topline"><span>03 — Selected projects</span><span>Build · Break · Learn</span></div>
+      <h2>My Works</h2>
+      <div class="works-grid" id="works-grid"></div>
+      <div class="works-footer"><span>More experiments coming soon.</span><a class="text-link" href="#contact">Start a conversation <span>↗</span></a></div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div><p class="eyebrow">04 — Open channel</p><h2>Have a signal<br /><em>to share?</em></h2></div>
+      <div class="contact-copy"><p>Whether it’s a security project, a curious question or a new opportunity — my inbox is open.</p><a class="contact-button" href="mailto:khoihn.ce190080@gmail.com">khoihn.ce190080@gmail.com <span>↗</span></a></div>
+    </section>
+
+    <footer class="site-footer"><span>© 2026 HÀ NHỰT KHÔI</span><span>Information Assurance / Aspiring SOC Analyst</span><a href="#top">Back to top ↑</a></footer>
+  </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
-
 </html>
