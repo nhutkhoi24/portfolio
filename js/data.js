@@ -148,7 +148,7 @@ const cvData = {
     },
     {
       title: "UniForge",
-      description: "A live project exploring product building, collaboration and modern web delivery.",
+      description: "A platform that connects, supports, and helps develop outstanding startup projects from FPT University students.",
       link: "https://uniforge-platform.vercel.app",
     },
   ],
