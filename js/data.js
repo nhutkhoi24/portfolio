@@ -22,6 +22,13 @@ const cvData = {
       date: "9/2023 - Present",
     },
   ],
+  workExperience: [
+    {
+      role: "Internship — Digital Transformation Center",
+      organization: "Trung tâm Chuyển đổi số · Sở Khoa học và Công nghệ tỉnh Cà Mau",
+      date: "05/01/2026 - 11/04/2026",
+    },
+  ],
   certificates: [
     {
       title: "CertNexus Certified Ethical Emerging Technologist",
