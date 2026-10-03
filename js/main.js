@@ -13,6 +13,23 @@ document.addEventListener("DOMContentLoaded", () => {
     </article>
   `).join("");
 
+  const certificatesList = document.getElementById("certificates-list");
+  if (certificatesList) {
+    certificatesList.innerHTML = cvData.certificates.map((certificate) => `
+      <article class="credential-item">
+        <div><h3>${certificate.title}</h3><p>${certificate.organization} · ${certificate.date}</p></div>
+        <a href="${certificate.link}" target="_blank" rel="noopener noreferrer">View ↗</a>
+      </article>
+    `).join("");
+  }
+
+  const activitiesList = document.getElementById("activities-list");
+  if (activitiesList) {
+    activitiesList.innerHTML = cvData.achievements.map((achievement) => `
+      <article class="credential-item"><div><h3>${achievement.title}</h3><p>${achievement.event}</p></div></article>
+    `).join("");
+  }
+
   const sections = [...document.querySelectorAll("section[id]")];
   const navLinks = [...document.querySelectorAll(".main-nav a")];
   const observer = new IntersectionObserver((entries) => {

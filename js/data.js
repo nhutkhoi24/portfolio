@@ -28,6 +28,11 @@ const cvData = {
       organization: "Trung tâm Chuyển đổi số · Sở Khoa học và Công nghệ tỉnh Cà Mau",
       date: "05/01/2026 - 11/04/2026",
     },
+    {
+      role: "Chief Technology Officer — UniForge",
+      organization: "UniForge",
+      date: "05/09/2026 - Present",
+    },
   ],
   certificates: [
     {
