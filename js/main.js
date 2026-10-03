@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   worksGrid.innerHTML = cvData.projects.map((project, index) => `
     <article class="work-card">
-      <div class="work-thumb" aria-hidden="true"><span class="work-number">0${index + 1}</span></div>
       <div class="work-meta">
         <h3>${project.title}</h3>
         <p>${project.description}</p>
