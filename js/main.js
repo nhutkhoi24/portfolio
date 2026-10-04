@@ -3,12 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!worksGrid || typeof cvData === "undefined") return;
 
   worksGrid.innerHTML = cvData.projects.map((project, index) => `
-    <article class="work-card">
-      <div class="work-meta">
+    <article class="project-card">
+      <div class="project-label">PROJECT · ${String(index + 1).padStart(2, "0")}</div>
+      <div class="project-main">
         <h3>${project.title}</h3>
         <p>${project.description}</p>
-        <a class="resource-link" href="${project.link}" target="_blank" rel="noopener noreferrer">Open project ↗</a>
       </div>
+      <a class="project-link" href="${project.link}" target="_blank" rel="noopener noreferrer">Open project ↗</a>
     </article>
   `).join("");
 
