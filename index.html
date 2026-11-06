@@ -1,111 +1,555 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Hà Nhựt Khôi — Information Assurance student and aspiring SOC Analyst." />
-  <title>Hà Nhựt Khôi — Cybersecurity Portfolio</title>
+  <meta name="description"
+    content="Hà Nhựt Khôi — Information Assurance Student & Aspiring SOC Analyst. Portfolio inspired by Tim Gesemann." />
+  <title>Hà Nhựt Khôi — Portfolio | Cybersecurity & Engineering</title>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261004-2" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css?v=20261106-v3" />
 </head>
-<body>
-  <div class="dot-grid" aria-hidden="true"></div>
-  <main class="site-shell">
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="Home">
-        <span class="brand-mark">⌁</span><span>NHỰT KHÔI</span>
+
+<body id="top">
+
+  <!-- ── TIM GESEMANN LEFT SOCIAL RAIL ────────────────────────── -->
+  <aside class="socials" aria-label="Social media channels">
+    <a target="_blank" rel="noopener noreferrer" href="https://github.com/nhutkhoi24" aria-label="GitHub Profile">
+      <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M12 2C10.6868 2 9.38642 2.25866 8.17317 2.7612C6.95991 3.26375 5.85752 4.00035 4.92893 4.92893C3.05357 6.8043 2 9.34784 2 12C2 16.42 4.87 20.17 8.84 21.5C9.34 21.58 9.5 21.27 9.5 21V19.31C6.73 19.91 6.14 17.97 6.14 17.97C5.68 16.81 5.03 16.5 5.03 16.5C4.12 15.88 5.1 15.9 5.1 15.9C6.1 15.97 6.63 16.93 6.63 16.93C7.5 18.45 8.97 18 9.54 17.76C9.63 17.11 9.89 16.67 10.17 16.42C7.95 16.17 5.62 15.31 5.62 11.5C5.62 10.39 6 9.5 6.65 8.79C6.55 8.54 6.2 7.5 6.75 6.15C6.75 6.15 7.59 5.88 9.5 7.17C10.29 6.95 11.15 6.84 12 6.84C12.85 6.84 13.71 6.95 14.5 7.17C16.41 5.88 17.25 6.15 17.25 6.15C17.8 7.5 17.45 8.54 17.35 8.79C18 9.5 18.38 10.39 18.38 11.5C18.38 15.32 16.04 16.16 13.81 16.41C14.17 16.72 14.5 17.33 14.5 18.26V21C14.5 21.27 14.66 21.59 15.17 21.5C19.14 20.16 22 16.42 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7362 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2Z" />
+      </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" href="https://linkedin.com" aria-label="LinkedIn Profile">
+      <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z" />
+      </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com" aria-label="Twitter Profile">
+      <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    </a>
+    <a href="mailto:khoihn.ce190080@gmail.com" aria-label="Email Hà Nhựt Khôi">
+      <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+      </svg>
+    </a>
+  </aside>
+
+  <!-- ── SITE HEADER (TIM GESEMANN MINIMAL STYLE) ──────────────── -->
+  <header class="site-header">
+    <div class="wrap header-container">
+      <a class="brand" href="#top" aria-label="Hà Nhựt Khôi Homepage">
+        <span class="brand-text">nk</span>
       </a>
-      <nav class="main-nav" aria-label="Main navigation">
-        <a class="active" href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#experience">My Work</a>
-        <a href="#works">Projects</a>
-        <a href="#credentials">Credentials</a>
-        <a href="#contact">Contact</a>
+
+      <nav class="main-nav" aria-label="Main Navigation">
+        <ul class="nav-links" id="nav-links">
+          <li><a class="nav-link" href="#skills">Skills</a></li>
+          <li><a class="nav-link" href="#work">My Work</a></li>
+          <li><a class="nav-link" href="#nex26">Sổ Ơi & F-Hacker <span class="nav-link-badge">Honors</span></a></li>
+          <li><a class="nav-link" href="#experience">Experience</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
       </nav>
-      <a class="header-cta" href="cv/CV_HaNhutKhoi.pdf" download>Resume <span>↗</span></a>
-    </header>
 
-    <section class="hero" id="top">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="live-dot"></span> Information Assurance · Can Tho, VN</p>
-        <h1>Security<br /><em>with intent.</em></h1>
-        <p class="hero-intro">Xin chào, mình là <strong>Hà Nhựt Khôi</strong> — Information Assurance student tại FPT University, tập trung vào malware analysis, reverse engineering, network defense, database security, pentest automation và system administration.</p>
-        <p class="hero-intro hero-intro-secondary">Mình biến những câu hỏi khó về hệ thống thành insight rõ ràng, actionable và an toàn hơn.</p>
-        <a class="text-link" href="#about">Explore profile <span>↘</span></a>
+      <button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── HERO SECTION (EXACT TIM GESEMANN STYLE) ────────────────── -->
+  <section class="hero-section" id="about">
+    <div class="hero-inner wrap">
+      <div class="cta-container">
+        <p class="cta-greeting cta-greeting--hi">
+          Hi!<span class="wave-emoji" style="font-size: 2.8rem; margin-left: 8px;">✌🏼</span>
+        </p>
+
+        <p class="cta-greeting--name-row">
+          <span class="cta-name-intro">my name is</span>
+        <h1 class="cta-name-main">Hà Nhựt Khôi</h1>
+        </p>
+
+        <p class="cta-tagline">Find the signal in the noise.</p>
+
+        <p class="cta-introduction">
+          I'm an Information Assurance student at FPT University with a passion for malware analysis, reverse
+          engineering and SOC operations.
+        </p>
+
+        <a class="cta-button" href="#contact">
+          <p>GET IN TOUCH</p>
+        </a>
       </div>
-      <div class="hero-visual">
-        <div class="hero-image-wrap">
-          <img src="image/nhutkhoi.png" alt="Portrait of Hà Nhựt Khôi" />
-          <span class="image-index">01 / 04</span>
+
+      <div class="hero-img-wrap">
+        <img src="image/nhutkhoi_cutout.png" alt="Hà Nhựt Khôi profile" class="hero-profile-img" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── "I'M GOOD AT THIS" (SKILLS) ───────────────────────────── -->
+  <section class="section section-alt" id="skills">
+    <div class="wrap">
+      <span class="section-kicker">Competencies & Toolkits</span>
+      <h2 class="section-title">I'M GOOD AT THIS</h2>
+      <p class="section-subtitle">
+        Các công cụ, hệ điều hành và kỹ năng thực chiến được áp dụng xuyên suốt trong học tập, nghiên cứu mã độc, phòng
+        thủ hệ thống và kiểm thử an toàn.
+      </p>
+
+      <div class="skills-grid" id="skills-container">
+        <!-- Rendered dynamically from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ── "THINGS, I WORKED ON" (PROJECTS) ──────────────────────── -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="projects-header-row">
+        <div>
+          <span class="section-kicker">Featured Projects</span>
+          <h2 class="section-title">THINGS, I WORKED ON</h2>
+          <p class="section-subtitle">
+            Các dự án công nghệ, nghiên cứu an toàn thông tin và nền tảng khởi nghiệp đã xây dựng và hoàn thiện.
+          </p>
         </div>
-        <div class="hero-note">“Find the signal<br />in the noise.”</div>
-        <div class="hero-accent accent-light"></div>
-        <div class="hero-accent accent-olive"></div>
+        <a class="cta-button cta-button-secondary" href="https://github.com/nhutkhoi24" target="_blank"
+          rel="noopener noreferrer">
+          <span>ALL REPOSITORIES</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+          </svg>
+        </a>
       </div>
-    </section>
 
-    <section class="content-section services-section" id="services">
-      <div class="section-topline"><span>01 — Capabilities</span><span>Selected focus</span></div>
-      <h2>My Services</h2>
-      <div class="services-grid">
-        <article class="service-card service-neutral"><span class="service-icon">⌁</span><h3>Database<br />Security</h3><p>Protect data at its core with safer access, clearer visibility and stronger controls.</p><a href="#experience">Learn more ↗</a></article>
-        <article class="service-card service-ochre"><span class="service-icon">◌</span><h3>Pentest<br />Automation</h3><p>Turn repeatable security checks into efficient workflows for faster, better findings.</p><a href="#experience">Learn more ↗</a></article>
-        <article class="service-card service-sage"><span class="service-icon">✦</span><h3>System<br />Administration</h3><p>Keep systems reliable, observable and ready to withstand real-world threats.</p><a href="#contact">Let's talk ↗</a></article>
+      <div class="projects-grid" id="projects-container">
+        <!-- Rendered dynamically from data.js -->
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="content-section about-section" id="about">
-      <div class="about-photo"><img src="image/nhutkhoi2.jpg" alt="Hà Nhựt Khôi" /><span>02 / about me</span></div>
-      <div class="about-copy"><div class="section-topline"><span>02 — The person behind the work</span></div><h2>About<br /><em>Me</em></h2><p>As an Information Assurance student at FPT University, I explore malware analysis, reverse engineering, network defense and the security of databases and systems.</p><p>I also enjoy turning pentest and system administration tasks into repeatable automation — practical, documented and easier to act on.</p><div class="mini-nav"><a class="selected" href="#about">Profile</a><a href="#services">Skills</a><a href="#experience">Experience</a></div><div class="about-details"><span><b>Education</b>FPT University, Can Tho</span><span><b>Goal</b>Become a SOC Analyst</span><span><b>Languages</b>English · Japanese</span></div></div>
-    </section>
+  <!-- ── FEATURED HONORS: SỔ ƠI (NEX26) & F-HACKER 2025 ────────── -->
+  <section class="section section-alt" id="nex26">
+    <div class="wrap">
+      <span class="section-kicker">Startup & Competitions</span>
+      <h2 class="section-title">FEATURED HONORS & RECOGNITION</h2>
+      <p class="section-subtitle">
+        Các dấu ấn tiêu biểu trong hành trình nghiên cứu, khởi nghiệp đổi mới sáng tạo và tranh tài an toàn thông tin
+        (CTF).
+      </p>
 
-    <section class="recognition-strip featured-recognition" aria-label="Recognition">
-      <span class="recognition-label">Featured achievement</span>
-      <div><strong>Third Prize — F Hacker</strong><span>FPT University · 2025</span></div>
-      <a href="https://github.com/nhutkhoi24" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a>
-    </section>
+      <!-- ── 1. SỔ ƠI (NEX26 CÀ MAU) ────────────────────────── -->
+      <div class="nex26-feature-card">
+        <div class="nex26-grid">
+          <div class="nex26-info">
+            <div class="nex26-badge-row">
+              <span class="nex26-ribbon-static">Chung Kết Khởi Nghiệp NEX26</span>
+            </div>
+            <h3 class="nex26-headline">Dự Án Sổ Ơi — Trợ Lý Bán Hàng Thông Minh</h3>
+            <p class="nex26-subtext">Cuộc thi Khởi nghiệp NEX26 Cà Mau (Next Entrepreneur Experience) · 30–31/10/2026
+            </p>
 
-    <section class="content-section experience-section" id="experience">
-      <div class="section-topline"><span>03 — Professional experience</span><span>Roles · Responsibility · Growth</span></div>
-      <h2>My Work</h2>
-      <article class="experience-card">
-        <div class="experience-label">Work experience · 01</div>
-        <div class="experience-main"><h3>Internship — Digital Transformation Center</h3><p>Trung tâm Chuyển đổi số · Sở Khoa học và Công nghệ tỉnh Cà Mau</p></div>
-        <div class="experience-date">05.01.2026<br />— 11.04.2026</div>
-      </article>
-      <article class="experience-card experience-current">
-        <div class="experience-label">Work experience · 02</div>
-        <div class="experience-main"><h3>Chief Technology Officer — UniForge</h3><p>Leading the technical direction, product building and delivery of UniForge.</p><a class="experience-link" href="https://uniforge-platform.vercel.app" target="_blank" rel="noopener noreferrer">uniforge-platform.vercel.app ↗</a></div>
-        <div class="experience-date">05.09.2026<br />— Present</div>
-      </article>
-    </section>
+            <div class="nex26-prose">
+              <p>
+                Vượt qua hành trình nghiên cứu, phát triển và hoàn thiện sản phẩm, nhóm sinh viên chuyên ngành An toàn
+                thông tin tại Đại học FPT campus Cần Thơ đã xuất sắc giành <strong>Giải Triển vọng tại Vòng Chung kết
+                  Khởi nghiệp NEX26 Cà Mau</strong>.
+              </p>
+              <p>
+                <strong>“Sổ Ơi – Trợ lý bán hàng”</strong> là giải pháp công nghệ hỗ trợ các hộ kinh doanh Việt Nam
+                trong hoạt động bán hàng, quản lý đơn hàng và sổ sách một cách đơn giản, trực quan và tối ưu chi phí.
+              </p>
+            </div>
 
-    <section class="content-section works-section" id="works">
-      <div class="section-topline"><span>04 — Selected projects</span><span>Build · Break · Learn</span></div>
-      <h2>Projects</h2>
-      <div class="works-grid" id="works-grid"></div>
-      <div class="works-footer"><span>More experiments coming soon.</span><a class="text-link" href="#contact">Start a conversation <span>↗</span></a></div>
-    </section>
+            <!-- Team Block -->
+            <div class="nex26-team-block">
+              <div class="nex26-team-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <span>Đội Ngũ Thành Viên Nhóm</span>
+              </div>
+              <div class="nex26-members-chips">
+                <span class="nex26-member-chip">Nguyễn Công Thịnh</span>
+                <span class="nex26-member-chip">Lê Gia Bảo</span>
+                <span class="nex26-member-chip">Trần Nguyễn Tiêu Phụng</span>
+                <span class="nex26-member-chip">Trần Nguyễn Thùy Linh</span>
+                <span class="nex26-member-chip highlight">Hà Nhựt Khôi</span>
+              </div>
+              <p class="nex26-mentor-note">Đồng hành cùng nhóm: Thầy Nguyễn Võ Thông Thái & Chị Mai Kiều Oanh (Mentor).
+              </p>
+            </div>
 
-    <section class="content-section credentials-section" id="credentials">
-      <div class="section-topline"><span>05 — Proof of practice</span><span>Learning · Competing · Growing</span></div>
-      <div class="credentials-grid">
-        <div><h2>Certificates</h2><div class="credentials-list" id="certificates-list"></div></div>
-        <div><h2>Activities</h2><div class="credentials-list" id="activities-list"></div></div>
+            <!-- Honors List (No cash values) -->
+            <div class="nex26-prizes-box">
+              <div class="nex26-prize-item">
+                <div class="nex26-prize-left">
+                  <span class="nex26-prize-icon"></span>
+                  <span class="nex26-prize-name">Giải Triển Vọng Vòng Chung kết NEX26</span>
+                </div>
+                <span class="nex26-prize-badge">Official Award</span>
+              </div>
+              <div class="nex26-prize-item">
+                <div class="nex26-prize-left">
+                  <span class="nex26-prize-icon"></span>
+                  <span class="nex26-prize-name">Gói thiết kế website doanh nghiệp chuyên nghiệp (Như Ý)</span>
+                </div>
+                <span class="nex26-prize-badge">Bảo trợ</span>
+              </div>
+              <div class="nex26-prize-item">
+                <div class="nex26-prize-left">
+                  <span class="nex26-prize-icon"></span>
+                  <span class="nex26-prize-name">Gói tài trợ & đào tạo phát triển NICE EDU</span>
+                </div>
+                <span class="nex26-prize-badge">Tài trợ</span>
+              </div>
+              <div class="nex26-prize-item">
+                <div class="nex26-prize-left">
+                  <span class="nex26-prize-icon"></span>
+                  <span class="nex26-prize-name">Gói vận chuyển & giao hàng TIPA Express (Tín Phát)</span>
+                </div>
+                <span class="nex26-prize-badge">Tài trợ</span>
+              </div>
+              <div class="nex26-prize-item">
+                <div class="nex26-prize-left">
+                  <span class="nex26-prize-icon"></span>
+                  <span class="nex26-prize-name">Gói trải nghiệm du lịch & kết nối NICE TOURIST</span>
+                </div>
+                <span class="nex26-prize-badge">Tài trợ</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="nex26-gallery-stack">
+            <div class="nex26-gallery-main">
+              <img src="image/nex26-team.jpg" alt="Đội ngũ Sổ Ơi tại Chung kết Khởi nghiệp NEX26 Cà Mau" />
+              <div class="nex26-gallery-caption">
+                <span>Team Sổ Ơi tại Chung kết NEX26 Cà Mau</span>
+              </div>
+            </div>
+            <div class="nex26-gallery-sub">
+              <div class="nex26-gallery-thumb">
+                <img src="image/nex26-cert.jpg" alt="Chứng nhận Giải Triển Vọng Sở KH&CN Cà Mau" />
+              </div>
+              <div class="nex26-gallery-thumb">
+                <img src="image/nex26-award.jpg" alt="Bảng giải thưởng và tài trợ NEX26" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
 
-    <section class="contact-section" id="contact">
-      <div><p class="eyebrow">06 — Open channel</p><h2>Have a signal<br /><em>to share?</em></h2></div>
-      <div class="contact-copy"><p>Whether it’s a security project, a curious question or a new opportunity — my inbox is open.</p><a class="contact-button" href="mailto:khoihn.ce190080@gmail.com">khoihn.ce190080@gmail.com <span>↗</span></a><a class="github-link" href="https://github.com/nhutkhoi24" target="_blank" rel="noopener noreferrer">github.com/nhutkhoi24 ↗</a></div>
-    </section>
+      <!-- ── 2. F-HACKER 2025 SHOWCASE CARD ────────────────────── -->
+      <div class="nex26-feature-card fhacker-feature-card">
+        <div class="nex26-grid">
+          <div class="nex26-info">
+            <div class="nex26-badge-row">
+              <span class="nex26-ribbon-static fhacker-ribbon">Chung Kết F-Hacker 2025</span>
+            </div>
+            <h3 class="nex26-headline">Third Prize — F-Hacker 2025: Giải Mã Tương Lai</h3>
+            <p class="nex26-subtext fhacker-subtext">Vòng Chung kết Cuộc thi An toàn thông tin · Đại học FPT ·
+              06/09/2025</p>
 
-    <footer class="site-footer"><span>© 2026 HÀ NHỰT KHÔI</span><span>Information Assurance / Aspiring SOC Analyst</span><a href="#top">Back to top ↑</a></footer>
-  </main>
-  <script src="js/data.js?v=20261004-2"></script>
-  <script src="js/main.js?v=20261004-2"></script>
+            <div class="nex26-prose">
+              <p>
+                Tranh tài tại <strong>Vòng Chung kết Cuộc thi An toàn thông tin F-Hacker 2025</strong>, team
+                <strong>D0ub3 Cl1ck!</strong> đã xuất sắc vượt qua các vòng thi CTF (Capture The Flag) kịch tính và
+                giành <strong>Giải Ba Bảng B</strong>.
+              </p>
+              <p>
+                Thử thách bao gồm các bài toán an toàn thông tin chuyên sâu: Web Exploitation, Reverse Engineering,
+                Binary Exploitation (Pwn), Digital Forensics và Cryptography, đòi hỏi tư duy phân tích lỗ hổng và phối
+                hợp đồng đội chuẩn xác.
+              </p>
+            </div>
+
+            <!-- Team Block -->
+            <div class="nex26-team-block">
+              <div class="nex26-team-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <span>Đội Thi: D0ub3 Cl1ck!</span>
+              </div>
+              <div class="nex26-members-chips">
+                <span class="nex26-member-chip highlight">Hà Nhựt Khôi</span>
+                <span class="nex26-member-chip">D0ub3 Cl1ck! Team Members</span>
+              </div>
+              <p class="nex26-mentor-note">Đại học FPT Cần Thơ · Bảng B (CTF An toàn thông tin sinh viên)</p>
+            </div>
+
+            <!-- Honors List (No cash values) -->
+            <div class="nex26-prizes-box">
+              <div class="nex26-prize-item">
+                <div class="nex26-prize-left">
+                  <span class="nex26-prize-icon"></span>
+                  <span class="nex26-prize-name">Giải Ba Bảng B — Vòng Chung kết F-Hacker 2025</span>
+                </div>
+                <span class="nex26-prize-badge fhacker-badge">Official Award</span>
+              </div>
+              <div class="nex26-prize-item">
+                <div class="nex26-prize-left">
+                  <span class="nex26-prize-icon"></span>
+                  <span class="nex26-prize-name">Bảng vinh danh & Kỷ niệm chương từ Đại học FPT</span>
+                </div>
+                <span class="nex26-prize-badge fhacker-badge">Vinh danh</span>
+              </div>
+              <div class="nex26-prize-item">
+                <div class="nex26-prize-left">
+                  <span class="nex26-prize-icon"></span>
+                  <span class="nex26-prize-name">Chứng nhận thành tích CTF & Kỹ năng tấn công / phòng thủ</span>
+                </div>
+                <span class="nex26-prize-badge fhacker-badge">Certificate</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="nex26-gallery-stack">
+            <div class="nex26-gallery-main">
+              <img src="image/fhacker-team.jpg" alt="Team D0ub3 Cl1ck! tại Vòng Chung kết F-Hacker 2025" />
+              <div class="nex26-gallery-caption">
+                <span>Team D0ub3 Cl1ck! · Vòng Chung kết F-Hacker 2025</span>
+              </div>
+            </div>
+            <div class="nex26-gallery-sub" style="grid-template-columns: 1fr;">
+              <div class="nex26-gallery-thumb" style="aspect-ratio: 16 / 10;">
+                <img src="image/fhacker-award.jpg" alt="Khoảnh khắc trao giải Ba F-Hacker 2025" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+  </section>
+
+  <!-- ── "EXPERIENCE" (TIMELINE) ───────────────────────────────── -->
+  <section class="section" id="experience">
+    <div class="wrap">
+      <span class="section-kicker">Career & Education</span>
+      <h2 class="section-title">WHERE I'VE WORKED & STUDIED</h2>
+      <p class="section-subtitle">
+        Quá trình học tập, kinh nghiệm lãnh đạo kỹ thuật và thực tập tại các đơn vị chuyên ngành.
+      </p>
+
+      <div class="timeline" id="experience-container">
+        <!-- Rendered dynamically from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ── "PROOF OF PRACTICE" (CREDENTIALS & ACTIVITIES) ────────── -->
+  <section class="section section-alt" id="credentials">
+    <div class="wrap">
+      <span class="section-kicker">Certifications & Competitions</span>
+      <h2 class="section-title">PROOF OF PRACTICE</h2>
+      <p class="section-subtitle">
+        Các chứng chỉ quốc tế và thành tích tại các sân chơi an toàn thông tin, lập trình và đổi mới sáng tạo.
+      </p>
+
+      <div class="proof-grid">
+        <div class="proof-column">
+          <h3 class="proof-column-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+            </svg>
+            <span>Certificates</span>
+          </h3>
+          <div class="proof-items-list" id="certificates-container">
+            <!-- Rendered from data.js -->
+          </div>
+        </div>
+
+        <div class="proof-column">
+          <h3 class="proof-column-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="7" />
+              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+            </svg>
+            <span>Activities & Awards</span>
+          </h3>
+          <div class="proof-items-list" id="activities-container">
+            <!-- Rendered from data.js -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── "CONTACT ME" ──────────────────────────────────────────── -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <span class="section-kicker">Let's Connect</span>
+      <h2 class="section-title">CONTACT ME</h2>
+      <p class="section-subtitle">
+        Dù là một dự án an toàn hệ thống, trao đổi học thuật hay cơ hội thực tập, mình luôn sẵn sàng kết nối.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-info-list">
+          <a class="contact-item" href="mailto:khoihn.ce190080@gmail.com">
+            <div class="contact-item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </div>
+            <div>
+              <p class="contact-item-label">Email</p>
+              <p class="contact-item-value">khoihn.ce190080@gmail.com</p>
+            </div>
+          </a>
+
+          <a class="contact-item" href="tel:0792577603">
+            <div class="contact-item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </div>
+            <div>
+              <p class="contact-item-label">Phone</p>
+              <p class="contact-item-value">079-257-7603</p>
+            </div>
+          </a>
+
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div>
+              <p class="contact-item-label">Location</p>
+              <p class="contact-item-value">Cần Thơ & Cà Mau, Vietnam</p>
+            </div>
+          </div>
+
+          <a class="contact-item" href="https://github.com/nhutkhoi24" target="_blank" rel="noopener noreferrer">
+            <div class="contact-item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+              </svg>
+            </div>
+            <div>
+              <p class="contact-item-label">GitHub</p>
+              <p class="contact-item-value">github.com/nhutkhoi24</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="contact-box">
+          <h3 class="contact-box-title">Start a Conversation</h3>
+          <p class="contact-box-desc">
+            Bạn có câu hỏi về các dự án bảo mật, muốn trao đổi về giải pháp SOC hoặc hợp tác phát triển công nghệ? Hộp
+            thư của mình luôn mở.
+          </p>
+          <a class="cta-button" href="mailto:khoihn.ce190080@gmail.com" style="width: 100%;">
+            <span>SEND ME AN EMAIL</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SITE FOOTER ───────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="brand-monogram">nk</span>
+          <span>Hà Nhựt Khôi</span>
+        </div>
+
+        <div class="footer-socials">
+          <a class="footer-social-btn" href="https://github.com/nhutkhoi24" target="_blank" rel="noopener noreferrer"
+            aria-label="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+          </a>
+          <a class="footer-social-btn" href="mailto:khoihn.ce190080@gmail.com" aria-label="Email">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </a>
+          <a class="footer-social-btn" href="#top" aria-label="Back to top">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="18 15 12 9 6 15" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Hà Nhựt Khôi. All rights reserved.</p>
+        <p>Information Assurance · Aspiring SOC Analyst · FPT University</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal for Certificates & Gallery -->
+  <div class="lightbox-modal" id="lightbox-modal" aria-hidden="true" role="dialog">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-dialog">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Close image">✕</button>
+      <img id="lightbox-img" src="" alt="Enlarged view" />
+      <p id="lightbox-caption" class="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="toast-notification" role="status" aria-live="polite">
+    <span id="toast-message">Copied to clipboard!</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js?v=20261106-v3"></script>
+  <script src="js/main.js?v=20261106-v3"></script>
 </body>
+
 </html>

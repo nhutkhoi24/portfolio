@@ -2,162 +2,256 @@
 const cvData = {
   personal: {
     name: "Hà Nhựt Khôi",
-    title: "Student - Aspiring SOC Analyst",
+    title: "Information Assurance Student & Aspiring SOC Analyst",
+    subtitle: "I turn security threats into actionable defenses.",
+    bio: "Xin chào, mình là Hà Nhựt Khôi — sinh viên chuyên ngành An toàn thông tin tại FPT University Can Tho, tập trung vào malware analysis, reverse engineering, network defense, pentest automation và system administration.",
     email: "khoihn.ce190080@gmail.com",
     phone: "079-257-7603",
-    location: "Ca Mau, Vietnam",
-    address: "Ca Mau",
-    height: "175 cm",
-    weight: "75 kg",
-    interests: [
-      "Coding, Music and Song, Football,..."
-    ],
-    profileImage: "image/nhutkhoi2.jpg",
+    location: "Can Tho & Ca Mau, Vietnam",
+    github: "https://github.com/nhutkhoi24",
+    profileImage: "image/nhutkhoi.png",
+    profileImage2: "image/nhutkhoi2.jpg",
   },
   education: [
     {
       school: "FPT University, Can Tho",
       major: "Information Assurance",
       status: "Student",
-      date: "9/2023 - Present",
+      date: "09/2023 - Present",
+      description: "Tập trung vào An toàn thông tin, Phân tích mã độc, Quản trị hệ thống & Mạng phòng thủ."
     },
   ],
   workExperience: [
     {
+      role: "Chief Technology Officer",
+      organization: "UniForge",
+      date: "05/09/2026 - Present",
+      description: "Dẫn dắt định hướng kỹ thuật, xây dựng nền tảng và triển khai giải pháp công nghệ cho các dự án khởi nghiệp sinh viên FPT.",
+      link: "https://uniforge-platform.vercel.app",
+      current: true,
+    },
+    {
       role: "Internship — Digital Transformation Center",
       organization: "Trung tâm Chuyển đổi số · Sở Khoa học và Công nghệ tỉnh Cà Mau",
       date: "05/01/2026 - 11/04/2026",
+      description: "Tham gia triển khai và hỗ trợ các giải pháp chuyển đổi số, an toàn dữ liệu cơ quan hành chính nhà nước.",
     },
     {
-      role: "Chief Technology Officer — UniForge",
-      organization: "UniForge",
-      date: "05/09/2026 - Present",
+      role: "Information Assurance Student",
+      organization: "FPT University, Can Tho Campus",
+      date: "09/2023 - Present",
+      description: "Nghiên cứu an toàn mạng, thực hành pentest automation, dịch ngược mã độc và tham gia các cuộc thi CTF/Secathon.",
     },
   ],
   certificates: [
     {
       title: "CertNexus Certified Ethical Emerging Technologist",
       organization: "CertNexus",
-      date: "9/2025",
+      date: "09/2025",
       link: "https://coursera.org/share/9c38d4b6e6661c552eb014f7940153e1",
+      badge: "Emerging Tech & Ethics"
     },
     {
       title: "Data Analysis and Visualization with Python",
       organization: "Microsoft",
-      date: "5/2025",
+      date: "05/2025",
       link: "https://coursera.org/share/e2986fb7a32f5237c4008e2697031878",
+      badge: "Python & Analytics"
     },
     {
       title: "Applied Cryptography",
       organization: "University of Colorado System",
-      date: "9/2023 - Present",
+      date: "09/2023 - Present",
       link: "https://coursera.org/share/e71d06fa3e2bf14e82e8c44a2c272b6f",
+      badge: "Cryptography"
     },
     {
       title: "Kali Linux",
       organization: "Board Infinity",
-      date: "5/2025",
+      date: "05/2025",
       link: "https://coursera.org/share/afcc71ed157d3e066225f21e695ce4fb",
+      badge: "Offensive Security"
     },
   ],
   skills: [
     {
-      category: "Languages",
-      items: ["English (Intermediate)", "Japanese (Beginner)"],
-    },
-    {
-      category: "Programming",
-      items: ["C", "Java", "Python"],
-    },
-    {
-      category: "Operating System and Toolkits",
+      category: "Operating System & Toolkits",
       items: [
-        "Kali Linux",
-        "Wireshark",
-        "Burp Suite",
-        "IDA",
-        "Hydra",
-        "Autospy",
+        { name: "Kali Linux", level: "Advanced" },
+        { name: "Wireshark", level: "Network Analysis" },
+        { name: "Burp Suite", level: "Web Pentesting" },
+        { name: "IDA Pro", level: "Reverse Engineering" },
+        { name: "Hydra", level: "Auth Auditing" },
+        { name: "Autopsy", level: "Digital Forensics" },
       ],
     },
     {
       category: "Security Practice",
-      items: ["Database Security", "Pentest Automation", "System Administration"],
-    },
-    {
-      category: "Networking",
-      items: ["TCP", "IDS", "Router", "Switch", "Firewall", "..."],
-    },
-    {
-      category: "Soft Skills",
       items: [
-        "Communication",
-        "Teamwork",
-        "Problem-solving",
-        "Critical Thinking",
-        "Time Management",
-        "Adaptability",
+        { name: "Malware Analysis", level: "Core" },
+        { name: "Reverse Engineering", level: "Core" },
+        { name: "Database Security", level: "Practice" },
+        { name: "Pentest Automation", level: "Workflow" },
+        { name: "System Administration", level: "Hardening" },
+        { name: "Network Defense", level: "SOC Operations" },
+      ],
+    },
+    {
+      category: "Programming & Scripting",
+      items: [
+        { name: "Python", level: "Primary" },
+        { name: "C", level: "Low-level" },
+        { name: "Java", level: "Application" },
+        { name: "Bash / Shell", level: "Automation" },
+      ],
+    },
+    {
+      category: "Networking & Protocols",
+      items: [
+        { name: "TCP/IP & OSI", level: "Deep Knowledge" },
+        { name: "IDS / IPS", level: "Monitoring" },
+        { name: "Firewall & Routing", level: "Hardening" },
+        { name: "Packet Inspection", level: "Traffic Analysis" },
+      ],
+    },
+    {
+      category: "Languages & Soft Skills",
+      items: [
+        { name: "English (Intermediate)", level: "Professional" },
+        { name: "Japanese (Beginner)", level: "Learning" },
+        { name: "Problem Solving", level: "Analytical" },
+        { name: "Team Leadership", level: "CTO Experience" },
       ],
     },
   ],
   achievements: [
     {
+      title: "Giải Triển Vọng – Chung kết Khởi nghiệp NEX26",
+      event: "Cuộc thi Khởi nghiệp Cà Mau · 31/10/2026",
+      description: 'Cùng nhóm sinh viên An toàn thông tin FPT University giành Giải Triển Vọng tại Vòng Chung kết NEX26 với dự án "Sổ Ơi – Trợ lý bán hàng bằng tiếng Việt dành cho hộ kinh doanh nhỏ".',
+      featured: true,
+      tag: "Startup Award",
+      images: {
+        award: "image/nex26-award.jpg",
+        cert:  "image/nex26-cert.jpg",
+        team:  "image/nex26-team.jpg",
+      },
+    },
+    {
       title: "Third Prize – F Hacker",
-      event: "FPT University 2025",
-      description: "Achieved 3rd place in F Hacker competition",
+      event: "FPT University · 2025",
+      description: "Đạt Giải Ba cuộc thi an toàn thông tin & hacking F Hacker tại Đại học FPT.",
+      tag: "Security Competition",
     },
     {
-      title: "Member of F-Sec",
-      event: "FPT University Can Tho Campus 2025",
-      description: "Active member of security club",
-    },
-    {
-      title: "Secathon Participant",
-      event: "FPT University 2025",
-      description: "Participated in cybersecurity competition",
-    },
-    {
-      title: "Cybersecurity Student Contest",
-      event: "Participant · Top 120 · 2026",
-      description: "Selected among the top 120 participants in the 2026 cybersecurity student contest.",
+      title: "Cybersecurity Student Contest — Top 120",
+      event: "Toàn quốc · 2026",
+      description: "Lọt vào Top 120 thí sinh xuất sắc trong cuộc thi Sinh viên với An toàn thông tin 2026.",
+      tag: "National Contest",
       link: "https://github.com/nhutkhoi24",
     },
     {
+      title: "Member of F-Sec",
+      event: "FPT University Can Tho Campus · 2025",
+      description: "Thành viên tích cực câu lạc bộ An toàn thông tin F-Sec, tham gia huấn luyện CTF và workshop bảo mật.",
+      tag: "Security Club",
+    },
+    {
+      title: "Secathon Participant",
+      event: "FPT University · 2025",
+      description: "Tham gia tranh tài thử thách Secathon về an toàn thông tin và phòng thủ hệ thống.",
+      tag: "Hackathon",
+    },
+    {
       title: "F Hacker Participant",
-      event: "FPT University 2025",
-      description: "Participated in hacking competition",
+      event: "FPT University · 2025",
+      description: "Tham gia giải đấu kỹ năng tấn công và bảo vệ hệ thống F Hacker 2025.",
+      tag: "Competition",
     },
   ],
   projects: [
     {
-      title: "Open Source Platform and Network Administration",
-      description:
-        "Linux Network Administration & Open Source Security: From Threat Identification to Risk Mitigation.",
-      link: "https://youtube.com/playlist?list=PLmktKq-DnS-mrJJOWt8q1-i5ZVUTrfBxi&si=EQ6gAVIbxTlcHECi",
+      id: "so-oi",
+      title: "Sổ Ơi – Trợ lý bán hàng bằng tiếng Việt",
+      awardBadge: "GIẢI TRIỂN VỌNG · NEX26",
+      description: "Dự án công nghệ hỗ trợ các hộ kinh doanh nhỏ tại Việt Nam bán hàng thông minh qua tương tác giọng nói tiếng Việt, quản lý sổ sách, đơn hàng và kho bãi một cách tự động.",
+      tags: ["Startup", "Voice AI", "Retail Tech", "NEX26 Cà Mau"],
+      link: "#nex26",
+      linkText: "Xem chi tiết dự án & giải thưởng ↘",
+      featured: true,
+      image: "image/nex26-team.jpg"
     },
     {
-      title: "Malware Analysis and Reverse Engineering",
-      description:
-        "Comprehensive malware analysis: From understanding its structure to actively implementing defenses to protect systems against real-world threats.",
-      link: "https://youtube.com/playlist?list=PLmktKq-DnS-luAPI__yBFt4IEnRJUoHZv&si=hZnmMUylPk4ySVTQ",
-    },
-    {
-      title: "Attack Simulation System And Common Types Of Attacks",
-      description: "identify common types of cyber attacks nowadays",
-      link: "https://youtube.com/playlist?list=PLmktKq-DnS-kgUVWEdMnJlx8fc_sLFnRF&si=3-IWzEMHNOgRG34E",
-    },
-    {
-      title: "UniForge",
-      description: "A platform that connects, supports, and helps develop outstanding startup projects from FPT University students.",
+      id: "uniforge",
+      title: "UniForge Startup Platform",
+      awardBadge: "CTO ROLE",
+      description: "Nền tảng kết nối, hỗ trợ ươm tạo và phát triển các dự án khởi nghiệp tiềm năng từ sinh viên Đại học FPT, phục vụ định hướng Trải nghiệm Khởi nghiệp.",
+      tags: ["CTO", "Next.js", "Vercel", "Platform Architecture"],
       link: "https://uniforge-platform.vercel.app",
+      linkText: "Visit uniforge-platform.vercel.app ↗",
+      featured: false,
+    },
+    {
+      id: "malware-analysis",
+      title: "Malware Analysis and Reverse Engineering",
+      awardBadge: "RESEARCH SERIES",
+      description: "Chuỗi phân tích chuyên sâu cấu trúc mã độc thực tế, sử dụng IDA Pro, Ghidra và kỹ thuật dịch ngược (Reverse Engineering) để phân tích hành vi và chủ động xây dựng giải pháp phòng thủ.",
+      tags: ["Reverse Engineering", "IDA Pro", "Malware Defense", "Security Lab"],
+      link: "https://youtube.com/playlist?list=PLmktKq-DnS-luAPI__yBFt4IEnRJUoHZv&si=hZnmMUylPk4ySVTQ",
+      linkText: "Watch Playlist on YouTube ↗",
+      featured: false,
+    },
+    {
+      id: "linux-network",
+      title: "Open Source Platform & Network Administration",
+      awardBadge: "SYSTEM HARDENING",
+      description: "Quản trị mạng Linux & bảo mật nền tảng mã nguồn mở: Từ nhận diện mối đe dọa, cấu hình tường lửa, phân quyền tối thiểu đến giám sát và giảm thiểu rủi ro bảo mật hệ thống.",
+      tags: ["Linux Admin", "Network Defense", "Open Source", "IDS/IPS"],
+      link: "https://youtube.com/playlist?list=PLmktKq-DnS-mrJJOWt8q1-i5ZVUTrfBxi&si=EQ6gAVIbxTlcHECi",
+      linkText: "Watch Playlist on YouTube ↗",
+      featured: false,
+    },
+    {
+      id: "attack-simulation",
+      title: "Attack Simulation System & Common Cyber Attacks",
+      awardBadge: "OFFENSIVE SIMULATION",
+      description: "Hệ thống mô phỏng kịch bản tấn công mạng phổ biến hiện nay, giúp đội ngũ SOC nhận biết dấu hiệu xâm nhập, xây dựng rule phát hiện và rèn luyện phản ứng sự cố.",
+      tags: ["Kali Linux", "Burp Suite", "Attack Simulation", "SOC Training"],
+      link: "https://youtube.com/playlist?list=PLmktKq-DnS-kgUVWEdMnJlx8fc_sLFnRF&si=3-IWzEMHNOgRG34E",
+      linkText: "Watch Playlist on YouTube ↗",
+      featured: false,
     },
   ],
-  goals: {
-    shortTerm: "Gain practical experience in cybersecurity",
-    longTerm: "Become a SOC Analyst within 2 years",
-    mission:
-      "Apply knowledge to promote information security in the digital era",
-  },
+  nex26Details: {
+    eventTitle: "Vòng Chung Kết Cuộc Thi Khởi Nghiệp NEX26 Cà Mau",
+    eventSubtitle: "Next Entrepreneur Experience 2026 · 30–31/10/2026",
+    teamName: "Nhóm Sổ Ơi — Đại học FPT Cần Thơ",
+    mentor: "Thầy Nguyễn Võ Thông Thái & Chị Mai Kiều Oanh",
+    members: [
+      { name: "Nguyễn Công Thịnh", role: "Team Member" },
+      { name: "Lê Gia Bảo", role: "Team Member" },
+      { name: "Trần Nguyễn Tiêu Phụng", role: "Team Member" },
+      { name: "Trần Nguyễn Thùy Linh", role: "Team Member" },
+      { name: "Hà Nhựt Khôi", role: "Information Assurance / Tech", highlight: true },
+    ],
+    prizes: [
+      { name: "Giải Triển Vọng Vòng Chung kết NEX26", value: "3.000.000 ₫" },
+      { name: "Gói thiết kế Website chuyên nghiệp (Như Ý)", value: "10.000.000 ₫" },
+      { name: "Gói đào tạo & tài trợ từ NICE EDU", value: "6.000.000 ₫" },
+      { name: "Gói vận chuyển TIPA Express (Tín Phát)", value: "3.000.000 ₫" },
+      { name: "Gói du lịch & trải nghiệm NICE TOURIST", value: "2.000.000 ₫" },
+    ],
+    images: [
+      { src: "image/nex26-team.jpg", caption: "Đội ngũ Sổ Ơi tại Chung kết Khởi nghiệp NEX26 Cà Mau" },
+      { src: "image/nex26-cert.jpg", caption: "Chứng nhận Giải Triển Vọng từ Sở KH&CN tỉnh Cà Mau" },
+      { src: "image/nex26-award.jpg", caption: "Các giải thưởng và gói bảo trợ khởi nghiệp trao tặng" },
+    ]
+  }
 };
 
-// Khoiha
+if (typeof window !== "undefined") {
+  window.cvData = cvData;
+}
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = cvData;
+}
