@@ -183,7 +183,7 @@ const cvData = {
       awardBadge: "GIẢI TRIỂN VỌNG · NEX26",
       description: "Dự án công nghệ hỗ trợ các hộ kinh doanh nhỏ tại Việt Nam bán hàng thông minh qua tương tác giọng nói tiếng Việt, quản lý sổ sách, đơn hàng và kho bãi một cách tự động.",
       tags: ["Startup", "Voice AI", "Retail Tech", "NEX26 Cà Mau"],
-      link: "#nex26",
+      link: "https://sooi.vercel.app",
       linkText: "Xem chi tiết dự án & giải thưởng ↘",
       featured: true,
       image: "image/nex26-team.jpg"
