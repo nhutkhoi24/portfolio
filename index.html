@@ -15,7 +15,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=20261106-v3" />
+  <link rel="stylesheet" href="styles.css?v=20261115-contact" />
 </head>
 
 <body id="top">
@@ -71,20 +71,26 @@
     </div>
   </header>
 
-  <!-- ── HERO SECTION (EXACT TIM GESEMANN STYLE) ────────────────── -->
+  <!-- ── HERO SECTION (TIM GESEMANN + CYBER ANIMATIONS) ────────── -->
   <section class="hero-section" id="about">
+    <!-- Ambient Interactive Cyber Particles Canvas -->
+    <canvas id="hero-particles" class="hero-particles-canvas" aria-hidden="true"></canvas>
+
     <div class="hero-inner wrap">
       <div class="cta-container">
         <p class="cta-greeting cta-greeting--hi">
-          Hi!<span class="wave-emoji" style="font-size: 2.8rem; margin-left: 8px;">✌🏼</span>
+          Hi!<span class="wave-emoji" aria-label="Waving hand">✌🏼</span>
         </p>
 
-        <p class="cta-greeting--name-row">
+        <div class="cta-greeting--name-row">
           <span class="cta-name-intro">my name is</span>
-        <h1 class="cta-name-main">Hà Nhựt Khôi</h1>
-        </p>
+          <h1 class="cta-name-main">Hà Nhựt Khôi</h1>
+        </div>
 
-        <p class="cta-tagline">Find the signal in the noise.</p>
+        <p class="cta-tagline" aria-label="Tagline">
+          <span class="typewriter-prefix">&gt; </span><span id="typewriter-text">Find the signal in the
+            noise.</span><span class="typewriter-cursor">_</span>
+        </p>
 
         <p class="cta-introduction">
           I'm an Information Assurance student at FPT University with a passion for malware analysis, reverse
@@ -96,8 +102,10 @@
         </a>
       </div>
 
-      <div class="hero-img-wrap">
-        <img src="image/nhutkhoi_cutout.png" alt="Hà Nhựt Khôi profile" class="hero-profile-img" />
+      <div class="hero-img-wrap" id="hero-img-wrap">
+        <div class="hero-portrait-aura" aria-hidden="true"></div>
+        <img src="image/nhutkhoi_cutout.png" alt="Hà Nhựt Khôi profile" class="hero-profile-img"
+          id="hero-profile-img" />
       </div>
     </div>
   </section>
@@ -315,9 +323,7 @@
               <div class="nex26-prize-item">
                 <div class="nex26-prize-left">
                   <span class="nex26-prize-icon"></span>
-                  <span class="nex26-prize-name">Bảng vinh danh từ Đại học FPT</span>
                 </div>
-                <span class="nex26-prize-badge fhacker-badge">Vinh danh</span>
               </div>
               <div class="nex26-prize-item">
                 <div class="nex26-prize-left">
@@ -345,8 +351,6 @@
         </div>
       </div>
     </div>
-  </section>
-  </div>
   </section>
 
   <!-- ── "EXPERIENCE" (TIMELINE) ───────────────────────────────── -->
@@ -473,19 +477,59 @@
           </a>
         </div>
 
-        <div class="contact-box">
+        <div class="contact-box card-spotlight">
           <h3 class="contact-box-title">Start a Conversation</h3>
           <p class="contact-box-desc">
-            Bạn có câu hỏi về các dự án bảo mật, muốn trao đổi về giải pháp SOC hoặc hợp tác phát triển công nghệ? Hộp
-            thư của mình luôn mở.
+            Bạn có câu hỏi về các dự án bảo mật, muốn trao đổi về giải pháp SOC hoặc cơ hội hợp tác phát triển? Hãy gửi tin nhắn cho mình nhé.
           </p>
-          <a class="cta-button" href="mailto:khoihn.ce190080@gmail.com" style="width: 100%;">
-            <span>SEND ME AN EMAIL</span>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-            </svg>
-          </a>
+
+          <form class="contact-form" id="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-name">Họ và tên</label>
+                <input type="text" id="contact-name" name="name" placeholder="Nguyễn Văn A" autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Email của bạn</label>
+                <input type="email" id="contact-email" name="email" placeholder="name@example.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-subject">Tiêu đề trao đổi</label>
+              <input type="text" id="contact-subject" name="subject" placeholder="Cơ hội hợp tác / Trao đổi dự án..." />
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message">Nội dung tin nhắn</label>
+              <textarea id="contact-message" name="message" rows="4" placeholder="Nhập nội dung bạn muốn gửi tới Hà Nhựt Khôi..."></textarea>
+            </div>
+
+            <button type="submit" class="cta-button contact-submit-btn" id="contact-submit-btn">
+              <span>SEND ME AN EMAIL</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+              </svg>
+            </button>
+
+            <!-- Quick direct actions -->
+            <div class="contact-quick-options">
+              <span class="quick-options-title">Hoặc kết nối trực tiếp:</span>
+              <div class="quick-options-row">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=khoihn.ce190080@gmail.com" target="_blank" rel="noopener noreferrer" class="quick-opt-btn" id="open-gmail-btn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <span>Mở Gmail Web ↗</span>
+                </a>
+                <button type="button" class="quick-opt-btn" id="copy-email-btn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  <span>Copy Email</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="contact-status-msg" id="contact-status-msg" role="status" aria-live="polite"></div>
+          </form>
         </div>
       </div>
     </div>
@@ -547,9 +591,18 @@
     <span id="toast-message">Copied to clipboard!</span>
   </div>
 
+  <!-- Floating Back-to-Top with Circular Scroll Progress -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Lên đầu trang">
+    <svg class="progress-ring" width="46" height="46" viewBox="0 0 46 46">
+      <circle class="progress-ring-track" cx="23" cy="23" r="19" fill="none" stroke-width="3" />
+      <circle class="progress-ring-circle" id="progress-circle" cx="23" cy="23" r="19" fill="none" stroke-width="3" />
+    </svg>
+    <span class="back-to-top-arrow">↑</span>
+  </button>
+
   <!-- Scripts -->
-  <script src="js/data.js?v=20261106-v3"></script>
-  <script src="js/main.js?v=20261106-v3"></script>
+  <script src="js/data.js?v=20261115-contact"></script>
+  <script src="js/main.js?v=20261115-contact"></script>
 </body>
 
 </html>

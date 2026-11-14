@@ -1,5 +1,6 @@
 // ===== MAIN.JS =====
-// Portfolio Logic & Dynamic Rendering inspired by Tim Gesemann
+// Portfolio Logic & High-Performance Micro-Animations
+// Inspired by Tim Gesemann (tim-gesemann.dev) with Cybersecurity Polish
 
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof cvData === "undefined") {
@@ -18,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
       "Languages & Soft Skills": `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`
     };
 
-    skillsContainer.innerHTML = cvData.skills.map((category) => `
-      <div class="skill-category-card">
+    skillsContainer.innerHTML = cvData.skills.map((category, idx) => `
+      <div class="skill-category-card card-spotlight reveal-init delay-${(idx % 4) + 1}">
         <div class="skill-cat-header">
           <div class="skill-cat-icon">${categoryIcons[category.category] || "✦"}</div>
           <h3 class="skill-cat-title">${category.category}</h3>
@@ -39,9 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // ── 2. RENDER PROJECTS ("THINGS, I WORKED ON") ────────────────
   const projectsContainer = document.getElementById("projects-container");
   if (projectsContainer && cvData.projects) {
-    projectsContainer.innerHTML = cvData.projects.map((project) => `
-      <div class="work-item">
-        <div class="work-item-card">
+    projectsContainer.innerHTML = cvData.projects.map((project, idx) => `
+      <div class="work-item reveal-init delay-${(idx % 3) + 1}">
+        <div class="work-item-card card-spotlight">
           ${project.awardBadge ? `<span class="work-badge">${project.awardBadge}</span>` : ""}
           <h3 class="work-item-title">${project.title}</h3>
           <p class="work-item-description">${project.description}</p>
@@ -65,10 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // ── 3. RENDER EXPERIENCE TIMELINE ────────────────────────────
   const experienceContainer = document.getElementById("experience-container");
   if (experienceContainer && cvData.workExperience) {
-    experienceContainer.innerHTML = cvData.workExperience.map((exp) => `
-      <div class="timeline-item${exp.current ? " current" : ""}">
+    experienceContainer.innerHTML = cvData.workExperience.map((exp, idx) => `
+      <div class="timeline-item${exp.current ? " current" : ""} reveal-init delay-${(idx % 3) + 1}">
         <div class="timeline-node"></div>
-        <div class="timeline-card">
+        <div class="timeline-card card-spotlight">
           <div class="timeline-header">
             <h3 class="timeline-role">${exp.role}</h3>
             <span class="timeline-date">${exp.date}</span>
@@ -89,15 +90,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // ── 4. RENDER CERTIFICATES ───────────────────────────────────
   const certificatesContainer = document.getElementById("certificates-container");
   if (certificatesContainer && cvData.certificates) {
-    certificatesContainer.innerHTML = cvData.certificates.map((cert) => `
-      <article class="proof-card">
+    certificatesContainer.innerHTML = cvData.certificates.map((cert, idx) => `
+      <article class="proof-card card-spotlight reveal-init delay-${(idx % 3) + 1}">
         <div class="proof-card-info">
           <h4>${cert.title}</h4>
           <p>${cert.organization} · ${cert.date}</p>
         </div>
-        <a class="proof-action-btn" href="${cert.link}" target="_blank" rel="noopener noreferrer">
-          Verify ↗
-        </a>
+        <div class="proof-card-actions">
+          ${cert.image ? `
+            <button class="proof-action-btn view-photo-btn" data-img="${cert.image}" data-caption="${cert.title} · ${cert.organization} (${cert.date})">
+              Photo ↗
+            </button>
+          ` : ""}
+          <a class="proof-action-btn" href="${cert.link}" target="_blank" rel="noopener noreferrer">
+            Verify ↗
+          </a>
+        </div>
       </article>
     `).join("");
   }
@@ -105,8 +113,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // ── 5. RENDER ACTIVITIES & AWARDS ─────────────────────────────
   const activitiesContainer = document.getElementById("activities-container");
   if (activitiesContainer && cvData.achievements) {
-    activitiesContainer.innerHTML = cvData.achievements.map((ach) => `
-      <article class="proof-card${ach.featured ? " featured" : ""}">
+    activitiesContainer.innerHTML = cvData.achievements.map((ach, idx) => `
+      <article class="proof-card card-spotlight${ach.featured ? " featured" : ""} reveal-init delay-${(idx % 3) + 1}">
         <div class="proof-card-info">
           <h4>${ach.title}</h4>
           <p>${ach.event}</p>
@@ -128,7 +136,297 @@ document.addEventListener("DOMContentLoaded", () => {
     `).join("");
   }
 
-  // ── 6. MOBILE NAVIGATION TOGGLE ──────────────────────────────
+  // ── 6. HERO DYNAMIC TYPEWRITER EFFECT ─────────────────────────
+  const typewriterText = document.getElementById("typewriter-text");
+  if (typewriterText) {
+    const phrases = [
+      "Find the signal in the noise.",
+      "SOC Operations & Threat Hunting.",
+      "Malware Analysis & Reverse Engineering.",
+      "Pentest Automation & Network Defense.",
+      "Next-Gen Startup Builder (Sổ Ơi)."
+    ];
+
+    let phraseIndex = 0;
+    let charIndex = phrases[0].length;
+    let isDeleting = true;
+    let typeDelay = 2200;
+
+    const typeLoop = () => {
+      const currentPhrase = phrases[phraseIndex];
+
+      if (isDeleting) {
+        charIndex--;
+        typewriterText.textContent = currentPhrase.substring(0, charIndex);
+        typeDelay = 28;
+      } else {
+        charIndex++;
+        typewriterText.textContent = currentPhrase.substring(0, charIndex);
+        typeDelay = 60 + Math.random() * 35;
+      }
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        isDeleting = true;
+        typeDelay = 2400;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeDelay = 350;
+      }
+
+      setTimeout(typeLoop, typeDelay);
+    };
+
+    setTimeout(typeLoop, typeDelay);
+  }
+
+  // ── 7. AMBIENT CYBER PARTICLES CANVAS (60FPS) ─────────────────
+  const canvas = document.getElementById("hero-particles");
+  const heroSection = document.getElementById("about");
+  if (canvas && heroSection && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const ctx = canvas.getContext("2d");
+    let width = (canvas.width = heroSection.offsetWidth);
+    let height = (canvas.height = heroSection.offsetHeight);
+    let isHeroVisible = true;
+
+    const mouse = { x: null, y: null, radius: 140 };
+
+    const handleResize = () => {
+      if (!canvas || !heroSection) return;
+      width = canvas.width = heroSection.offsetWidth;
+      height = canvas.height = heroSection.offsetHeight;
+    };
+    window.addEventListener("resize", handleResize, { passive: true });
+
+    heroSection.addEventListener("mousemove", (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+
+    heroSection.addEventListener("mouseleave", () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    // Particle pool
+    const particleCount = Math.min(42, Math.floor(width / 26));
+    const particles = [];
+    const colors = [
+      "rgba(47, 53, 92, 0.32)",  // Navy primary
+      "rgba(231, 71, 43, 0.32)", // Coral secondary
+      "rgba(5, 150, 105, 0.30)"  // Emerald
+    ];
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        radius: Math.random() * 2 + 1.2,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+
+    const animateParticles = () => {
+      if (!isHeroVisible) {
+        requestAnimationFrame(animateParticles);
+        return;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+
+      // Connect particles
+      for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i];
+
+        p1.x += p1.vx;
+        p1.y += p1.vy;
+
+        if (p1.x < 0 || p1.x > width) p1.vx *= -1;
+        if (p1.y < 0 || p1.y > height) p1.vy *= -1;
+
+        // Mouse attraction/repulsion
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - p1.x;
+          const dy = mouse.y - p1.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < mouse.radius) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            p1.x -= (dx / dist) * force * 1.4;
+            p1.y -= (dy / dist) * force * 1.4;
+
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `rgba(231, 71, 43, ${0.16 * (1 - dist / mouse.radius)})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+
+        // Draw dot
+        ctx.beginPath();
+        ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p1.color;
+        ctx.fill();
+
+        // Connect with nearby neighbors
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(47, 53, 92, ${0.12 * (1 - dist / 110)})`;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animateParticles);
+    };
+
+    const heroObserver = new IntersectionObserver(([entry]) => {
+      isHeroVisible = entry.isIntersecting;
+    }, { threshold: 0.05 });
+    heroObserver.observe(heroSection);
+
+    animateParticles();
+  }
+
+  // ── 8. HERO PORTRAIT 3D MOUSE PARALLAX TILT ───────────────────
+  const heroProfileImg = document.getElementById("hero-profile-img");
+  if (heroSection && heroProfileImg && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let targetRotateX = 0;
+    let targetRotateY = 0;
+    let currentRotateX = 0;
+    let currentRotateY = 0;
+    let isHovering = false;
+
+    heroSection.addEventListener("mousemove", (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      targetRotateY = x * 8; // max 4deg
+      targetRotateX = -y * 6; // max 3deg
+      isHovering = true;
+    });
+
+    heroSection.addEventListener("mouseleave", () => {
+      targetRotateX = 0;
+      targetRotateY = 0;
+      isHovering = false;
+    });
+
+    const lerp = (start, end, factor) => start + (end - start) * factor;
+
+    const renderHeroParallax = () => {
+      currentRotateX = lerp(currentRotateX, targetRotateX, 0.08);
+      currentRotateY = lerp(currentRotateY, targetRotateY, 0.08);
+
+      if (Math.abs(currentRotateX) > 0.01 || Math.abs(currentRotateY) > 0.01 || isHovering) {
+        heroProfileImg.style.transform = `rotateX(${currentRotateX.toFixed(2)}deg) rotateY(${currentRotateY.toFixed(2)}deg)`;
+      } else {
+        heroProfileImg.style.transform = "rotateX(0deg) rotateY(0deg)";
+      }
+
+      requestAnimationFrame(renderHeroParallax);
+    };
+
+    requestAnimationFrame(renderHeroParallax);
+  }
+
+  // ── 9. DYNAMIC 3D CARD TILT + CURSOR SPOTLIGHT GLARE ──────────
+  document.querySelectorAll(".nex26-feature-card").forEach((card) => {
+    card.classList.add("card-spotlight");
+  });
+
+  const spotlightCards = document.querySelectorAll(".card-spotlight");
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    spotlightCards.forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+        card.style.setProperty("--spotlight-opacity", "1");
+
+        const normX = (x / rect.width - 0.5) * 2;
+        const normY = (y / rect.height - 0.5) * 2;
+        const tiltX = -normY * 4;
+        const tiltY = normX * 4;
+
+        card.style.transform = `perspective(850px) rotateX(${tiltX.toFixed(1)}deg) rotateY(${tiltY.toFixed(1)}deg) translateY(-5px)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.setProperty("--spotlight-opacity", "0");
+        card.style.transform = "";
+      });
+    });
+  }
+
+  // ── 10. SCROLL REVEAL (INTERSECTION OBSERVER) ─────────────────
+  document.querySelectorAll(".section-kicker, .section-title, .section-subtitle, .nex26-feature-card, .contact-item, .contact-box").forEach((el) => {
+    el.classList.add("reveal-init");
+  });
+
+  const revealElements = document.querySelectorAll(".reveal-init");
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("reveal-active");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: "0px 0px -60px 0px",
+      threshold: 0.08
+    });
+
+    revealElements.forEach((el) => revealObserver.observe(el));
+  } else {
+    revealElements.forEach((el) => el.classList.add("reveal-active"));
+  }
+
+  // ── 11. FLOATING BACK TO TOP + CIRCULAR SCROLL PROGRESS ───────
+  const backToTopBtn = document.getElementById("back-to-top");
+  const progressCircle = document.getElementById("progress-circle");
+  const circumference = 2 * Math.PI * 19; // ~119.38
+
+  if (backToTopBtn && progressCircle) {
+    const updateScrollProgress = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+
+      if (scrollTop > 280) {
+        backToTopBtn.classList.add("visible");
+      } else {
+        backToTopBtn.classList.remove("visible");
+      }
+
+      const offset = circumference - progress * circumference;
+      progressCircle.style.strokeDashoffset = Math.max(0, offset);
+    };
+
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // ── 12. MOBILE NAVIGATION TOGGLE ─────────────────────────────
   const mobileToggle = document.getElementById("mobile-toggle");
   const navLinks = document.getElementById("nav-links");
   if (mobileToggle && navLinks) {
@@ -136,7 +434,6 @@ document.addEventListener("DOMContentLoaded", () => {
       navLinks.classList.toggle("open");
     });
 
-    // Close when clicking any nav link
     navLinks.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
         navLinks.classList.remove("open");
@@ -144,7 +441,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ── 7. ACTIVE LINK SCROLL SPY ────────────────────────────────
+  // ── 13. ACTIVE LINK SCROLL SPY ───────────────────────────────
   const sections = document.querySelectorAll("section[id]");
   const navAnchorElements = document.querySelectorAll(".nav-link");
 
@@ -161,7 +458,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, { rootMargin: "-30% 0px -50% 0px", threshold: [0, 0.2, 0.5] });
 
-  // ── 8. LIGHTBOX MODAL FOR GALLERY IMAGES ────────────────────
+  sections.forEach((s) => spyObserver.observe(s));
+
+  // ── 14. LIGHTBOX MODAL FOR GALLERY IMAGES ────────────────────
   const lightboxModal = document.getElementById("lightbox-modal");
   const lightboxImg = document.getElementById("lightbox-img");
   const lightboxCaption = document.getElementById("lightbox-caption");
@@ -192,7 +491,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Attach click to gallery images and photo buttons
   document.querySelectorAll(".nex26-gallery-main img, .nex26-gallery-thumb img").forEach((img) => {
     img.style.cursor = "zoom-in";
     img.addEventListener("click", () => {
@@ -206,7 +504,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ── 9. TOAST NOTIFICATION FOR COPY ACTIONS ────────────────────
+  // ── 15. TOAST NOTIFICATION FOR COPY ACTIONS ───────────────────
   const toast = document.getElementById("toast-notification");
   const toastMessage = document.getElementById("toast-message");
   let toastTimer = null;
@@ -218,17 +516,110 @@ document.addEventListener("DOMContentLoaded", () => {
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
       toast.classList.remove("show");
-    }, 2500);
+    }, 2800);
   };
 
-  // Quick copy email button or click on contact email
+  // ── 16. CONTACT FORM & EMAIL ACTION ENGINE ────────────────────
+  const recipientEmail = "khoihn.ce190080@gmail.com";
+  const contactForm = document.getElementById("contact-form");
+  const contactStatusMsg = document.getElementById("contact-status-msg");
+  const openGmailBtn = document.getElementById("open-gmail-btn");
+  const copyEmailBtn = document.getElementById("copy-email-btn");
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const nameInput = document.getElementById("contact-name");
+      const emailInput = document.getElementById("contact-email");
+      const subjectInput = document.getElementById("contact-subject");
+      const messageInput = document.getElementById("contact-message");
+
+      const name = nameInput ? nameInput.value.trim() : "";
+      const senderEmail = emailInput ? emailInput.value.trim() : "";
+      const subject = subjectInput && subjectInput.value.trim()
+        ? subjectInput.value.trim()
+        : `[Portfolio Contact] Lời nhắn từ ${name || "Khách truy cập"}`;
+      const message = messageInput ? messageInput.value.trim() : "";
+
+      // Build structured email body
+      const bodyLines = [];
+      if (message) {
+        bodyLines.push(message);
+        bodyLines.push("");
+      }
+      bodyLines.push("──────────");
+      bodyLines.push(`Người gửi: ${name || "(Chưa nhập tên)"}`);
+      if (senderEmail) bodyLines.push(`Email liên hệ: ${senderEmail}`);
+      bodyLines.push("Gửi từ trang Portfolio của Hà Nhựt Khôi");
+
+      const fullBody = bodyLines.join("\n");
+
+      // 1. Direct Web Gmail Compose URL (100% reliable on Chrome, Edge, Safari, Firefox)
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipientEmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
+
+      // 2. Native mailto link for desktop clients
+      const mailtoUrl = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
+
+      // Auto-copy full draft to clipboard as backup
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(
+          `To: ${recipientEmail}\nSubject: ${subject}\n\n${fullBody}`
+        ).catch(() => {});
+      }
+
+      // Try opening Gmail Web compose
+      const newTab = window.open(gmailUrl, "_blank");
+      if (!newTab || newTab.closed || typeof newTab.closed === "undefined") {
+        // If popup blocked, fallback to mailto:
+        window.location.href = mailtoUrl;
+      }
+
+      // Display clean success status on the form
+      if (contactStatusMsg) {
+        contactStatusMsg.className = "contact-status-msg success";
+        contactStatusMsg.innerHTML = `✓ Đã mở trình soạn thư gửi tới <strong>${recipientEmail}</strong> (đồng thời đã copy nội dung tin nhắn vào clipboard của bạn)!`;
+      }
+
+      showToast("✓ Đang mở Gmail gửi tới " + recipientEmail);
+    });
+  }
+
+  // Quick Action 1: Open Gmail Web directly
+  if (openGmailBtn) {
+    openGmailBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const defaultSubject = "[Portfolio] Trao đổi và kết nối công việc";
+      const defaultBody = "Chào Hà Nhựt Khôi,\n\nMình liên hệ qua trang Portfolio của bạn:\n";
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipientEmail)}&su=${encodeURIComponent(defaultSubject)}&body=${encodeURIComponent(defaultBody)}`;
+      window.open(gmailUrl, "_blank");
+      showToast("✓ Đã mở Gmail Web gửi tới " + recipientEmail);
+    });
+  }
+
+  // Quick Action 2: 1-click Copy Email
+  if (copyEmailBtn) {
+    copyEmailBtn.addEventListener("click", () => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(recipientEmail).then(() => {
+          showToast("✓ Đã copy email: " + recipientEmail);
+        });
+      } else {
+        showToast("Email: " + recipientEmail);
+      }
+    });
+  }
+
+  // General mailto handler: right-click to copy, click copies + notifies
   document.querySelectorAll('a[href^="mailto:"]').forEach((mailLink) => {
     mailLink.addEventListener("contextmenu", (e) => {
       e.preventDefault();
-      const email = mailLink.getAttribute("href").replace("mailto:", "");
-      navigator.clipboard.writeText(email).then(() => {
-        showToast("Copied email: " + email);
-      });
+      const email = mailLink.getAttribute("href").replace("mailto:", "").split("?")[0];
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(() => {
+          showToast("✓ Đã copy email: " + email);
+        });
+      }
     });
   });
 });

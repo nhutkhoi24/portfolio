@@ -45,6 +45,14 @@ const cvData = {
   ],
   certificates: [
     {
+      title: "Microsoft Python Development Professional Certificate",
+      organization: "Microsoft",
+      date: "10/2026",
+      link: "https://coursera.org/share/e29501fa7b0581b2602c274d654a4e3e",
+      badge: "Professional Certificate (6 Courses)",
+      image: "image/cert-microsoft-python.jpg"
+    },
+    {
       title: "CertNexus Certified Ethical Emerging Technologist",
       organization: "CertNexus",
       date: "09/2025",
@@ -133,8 +141,8 @@ const cvData = {
       tag: "Startup Award",
       images: {
         award: "image/nex26-award.jpg",
-        cert:  "image/nex26-cert.jpg",
-        team:  "image/nex26-team.jpg",
+        cert: "image/nex26-cert.jpg",
+        team: "image/nex26-team.jpg",
       },
     },
     {
@@ -148,7 +156,6 @@ const cvData = {
       event: "Toàn quốc · 2026",
       description: "Lọt vào Top 120 thí sinh xuất sắc trong cuộc thi Sinh viên với An toàn thông tin 2026.",
       tag: "National Contest",
-      link: "https://github.com/nhutkhoi24",
     },
     {
       title: "Member of F-Sec",
