@@ -9,6 +9,7 @@ const cvData = {
     phone: "079-257-7603",
     location: "Can Tho & Ca Mau, Vietnam",
     github: "https://github.com/nhutkhoi24",
+    linkedin: "https://www.linkedin.com/in/nh%E1%BB%B1t-kh%C3%B4i-h%C3%A0-769003403/",
     profileImage: "image/nhutkhoi.png",
     profileImage2: "image/nhutkhoi2.jpg",
   },
@@ -44,6 +45,14 @@ const cvData = {
     },
   ],
   certificates: [
+    {
+      title: "CCNA: Switching, Routing, and Wireless Essentials",
+      organization: "Cisco Networking Academy · FPT University Can Tho",
+      date: "11/2026",
+      link: "https://www.netacad.com/recognitions/verify/01ce01e9-a185-46aa-b0b5-2878f8242576",
+      badge: "Cisco Certified (CCNA)",
+      image: "image/cert-cisco-ccna.jpg"
+    },
     {
       title: "Microsoft Python Development Professional Certificate",
       organization: "Microsoft",
