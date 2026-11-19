@@ -2,8 +2,9 @@
 // Portfolio Logic & High-Performance Micro-Animations
 // Inspired by Tim Gesemann (tim-gesemann.dev) with Cybersecurity Polish
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (typeof cvData === "undefined") {
+function initPortfolio() {
+  const data = (typeof window !== "undefined" && window.cvData) ? window.cvData : null;
+  if (!data) {
     console.error("cvData is not loaded!");
     return;
   }
@@ -488,401 +489,336 @@ document.addEventListener("DOMContentLoaded", () => {
     animateMeteors();
   }
 
-    // Animation Loop (60 FPS)
-    const animateMeteors = () => {
-      if (!isHeroVisible) {
-        requestAnimationFrame(animateMeteors);
-        return;
-      }
-
-      ctx.clearRect(0, 0, width, height);
-
-      // 1. Draw Twinkling Background White Stars
-      for (let i = 0; i < staticStars.length; i++) {
-        const star = staticStars[i];
-        star.phase += star.twinkleSpeed;
-        const currentAlpha = star.baseAlpha + Math.sin(star.phase) * (star.baseAlpha * 0.65);
-
-        ctx.save();
-        // Subtle soft shadow so white star pops on #f7f5f1
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius + 0.8, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(47, 53, 92, ${currentAlpha * 0.18})`;
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, currentAlpha * 1.3)})`;
-        ctx.shadowColor = "rgba(255, 255, 255, 0.85)";
-        ctx.shadowBlur = 4;
-        ctx.fill();
-
-        // 4-ray glint on brighter stars
-        if (star.isCross && currentAlpha > 0.45) {
-          ctx.strokeStyle = `rgba(255, 255, 255, ${currentAlpha * 0.85})`;
-          ctx.lineWidth = 0.7;
-          const glintLen = star.radius * 2.6;
-          ctx.beginPath();
-          ctx.moveTo(star.x - glintLen, star.y);
-          ctx.lineTo(star.x + glintLen, star.y);
-          ctx.moveTo(star.x, star.y - glintLen);
-          ctx.lineTo(star.x, star.y + glintLen);
-          ctx.stroke();
-        }
-        ctx.restore();
-      }
-
-      // 2. Draw & Update White Stardust Sparks
-      for (let i = sparks.length - 1; i >= 0; i--) {
-        const s = sparks[i];
-        s.x += s.vx;
-        s.y += s.vy;
-        s.alpha -= 0.012; // Slow fade
-
-        if (s.alpha <= 0) {
-          sparks.splice(i, 1);
-          continue;
-        }
-
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
-        ctx.shadowColor = `rgba(47, 53, 92, ${s.alpha * 0.3})`;
-        ctx.shadowBlur = 3;
-        ctx.fill();
-        ctx.restore();
-      }
-
-      // 3. Draw & Update Slow-Motion White Shooting Stars
-      for (let i = 0; i < shootingStars.length; i++) {
-        const star = shootingStars[i];
-        star.update();
-        star.draw();
-      }
-
-      requestAnimationFrame(animateMeteors);
-    };
-
-    const heroObserver = new IntersectionObserver(([entry]) => {
-      isHeroVisible = entry.isIntersecting;
-    }, { threshold: 0.05 });
-    heroObserver.observe(heroSection);
-
-    animateMeteors();
-  }
-
-// ── 8. HERO PORTRAIT 3D MOUSE PARALLAX TILT ───────────────────
+  // ── 8. HERO PORTRAIT 3D MOUSE PARALLAX TILT ───────────────────
   const heroProfileImg = document.getElementById("hero-profile-img");
-  if (heroSection && heroProfileImg && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    let targetRotateX = 0;
-    let targetRotateY = 0;
-    let currentRotateX = 0;
-    let currentRotateY = 0;
-    let isHovering = false;
+if (heroSection && heroProfileImg && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  let targetRotateX = 0;
+  let targetRotateY = 0;
+  let currentRotateX = 0;
+  let currentRotateY = 0;
+  let isHovering = false;
 
-    heroSection.addEventListener("mousemove", (e) => {
-      const rect = heroSection.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
+  heroSection.addEventListener("mousemove", (e) => {
+    const rect = heroSection.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-      targetRotateY = x * 8; // max 4deg
-      targetRotateX = -y * 6; // max 3deg
-      isHovering = true;
-    });
+    targetRotateY = x * 8; // max 4deg
+    targetRotateX = -y * 6; // max 3deg
+    isHovering = true;
+  });
 
-    heroSection.addEventListener("mouseleave", () => {
-      targetRotateX = 0;
-      targetRotateY = 0;
-      isHovering = false;
-    });
+  heroSection.addEventListener("mouseleave", () => {
+    targetRotateX = 0;
+    targetRotateY = 0;
+    isHovering = false;
+  });
 
-    const lerp = (start, end, factor) => start + (end - start) * factor;
+  const lerp = (start, end, factor) => start + (end - start) * factor;
 
-    const renderHeroParallax = () => {
-      currentRotateX = lerp(currentRotateX, targetRotateX, 0.08);
-      currentRotateY = lerp(currentRotateY, targetRotateY, 0.08);
+  const renderHeroParallax = () => {
+    currentRotateX = lerp(currentRotateX, targetRotateX, 0.08);
+    currentRotateY = lerp(currentRotateY, targetRotateY, 0.08);
 
-      if (Math.abs(currentRotateX) > 0.01 || Math.abs(currentRotateY) > 0.01 || isHovering) {
-        heroProfileImg.style.transform = `rotateX(${currentRotateX.toFixed(2)}deg) rotateY(${currentRotateY.toFixed(2)}deg)`;
-      } else {
-        heroProfileImg.style.transform = "rotateX(0deg) rotateY(0deg)";
-      }
-
-      requestAnimationFrame(renderHeroParallax);
-    };
+    if (Math.abs(currentRotateX) > 0.01 || Math.abs(currentRotateY) > 0.01 || isHovering) {
+      heroProfileImg.style.transform = `rotateX(${currentRotateX.toFixed(2)}deg) rotateY(${currentRotateY.toFixed(2)}deg)`;
+    } else {
+      heroProfileImg.style.transform = "rotateX(0deg) rotateY(0deg)";
+    }
 
     requestAnimationFrame(renderHeroParallax);
-  }
+  };
 
-  // ── 9. DYNAMIC 3D CARD TILT + CURSOR SPOTLIGHT GLARE ──────────
-  document.querySelectorAll(".nex26-feature-card").forEach((card) => {
-    card.classList.add("card-spotlight");
-  });
+  requestAnimationFrame(renderHeroParallax);
+}
 
-  const spotlightCards = document.querySelectorAll(".card-spotlight");
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    spotlightCards.forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+// ── 9. DYNAMIC 3D CARD TILT + CURSOR SPOTLIGHT GLARE ──────────
+document.querySelectorAll(".nex26-feature-card").forEach((card) => {
+  card.classList.add("card-spotlight");
+});
 
-        card.style.setProperty("--mouse-x", `${x}px`);
-        card.style.setProperty("--mouse-y", `${y}px`);
-        card.style.setProperty("--spotlight-opacity", "1");
+const spotlightCards = document.querySelectorAll(".card-spotlight");
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  spotlightCards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-        const normX = (x / rect.width - 0.5) * 2;
-        const normY = (y / rect.height - 0.5) * 2;
-        const tiltX = -normY * 4;
-        const tiltY = normX * 4;
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+      card.style.setProperty("--spotlight-opacity", "1");
 
-        card.style.transform = `perspective(850px) rotateX(${tiltX.toFixed(1)}deg) rotateY(${tiltY.toFixed(1)}deg) translateY(-5px)`;
-      });
+      const normX = (x / rect.width - 0.5) * 2;
+      const normY = (y / rect.height - 0.5) * 2;
+      const tiltX = -normY * 4;
+      const tiltY = normX * 4;
 
-      card.addEventListener("mouseleave", () => {
-        card.style.setProperty("--spotlight-opacity", "0");
-        card.style.transform = "";
-      });
-    });
-  }
-
-  // ── 10. SCROLL REVEAL (INTERSECTION OBSERVER) ─────────────────
-  document.querySelectorAll(".section-kicker, .section-title, .section-subtitle, .nex26-feature-card, .contact-item, .contact-box, .academic-overview-card, .pillar-card, .hero-stats-bar").forEach((el) => {
-    el.classList.add("reveal-init");
-  });
-
-  const revealElements = document.querySelectorAll(".reveal-init");
-  if ("IntersectionObserver" in window) {
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("reveal-active");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      rootMargin: "0px 0px -60px 0px",
-      threshold: 0.08
+      card.style.transform = `perspective(850px) rotateX(${tiltX.toFixed(1)}deg) rotateY(${tiltY.toFixed(1)}deg) translateY(-5px)`;
     });
 
-    revealElements.forEach((el) => revealObserver.observe(el));
-  } else {
-    revealElements.forEach((el) => el.classList.add("reveal-active"));
-  }
+    card.addEventListener("mouseleave", () => {
+      card.style.setProperty("--spotlight-opacity", "0");
+      card.style.transform = "";
+    });
+  });
+}
 
-  // ── 11. FLOATING BACK TO TOP + CIRCULAR SCROLL PROGRESS ───────
-  const backToTopBtn = document.getElementById("back-to-top");
-  const progressCircle = document.getElementById("progress-circle");
-  const circumference = 2 * Math.PI * 19; // ~119.38
+// ── 10. SCROLL REVEAL (INTERSECTION OBSERVER) ─────────────────
+// Keep section titles/kickers visible at all times, only gently reveal cards & items
+document.querySelectorAll(".nex26-feature-card, .contact-item, .contact-box, .academic-overview-card, .pillar-card, .hero-stats-bar").forEach((el) => {
+  el.classList.add("reveal-init");
+});
 
-  if (backToTopBtn && progressCircle) {
-    const updateScrollProgress = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
-
-      if (scrollTop > 280) {
-        backToTopBtn.classList.add("visible");
-      } else {
-        backToTopBtn.classList.remove("visible");
+const revealElements = document.querySelectorAll(".reveal-init");
+const activateVisibleElements = () => {
+  const vh = window.innerHeight || 800;
+  revealElements.forEach((el) => {
+    if (!el.classList.contains("reveal-active")) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < vh + 250) {
+        el.classList.add("reveal-active");
       }
-
-      const offset = circumference - progress * circumference;
-      progressCircle.style.strokeDashoffset = Math.max(0, offset);
-    };
-
-    window.addEventListener("scroll", updateScrollProgress, { passive: true });
-    updateScrollProgress();
-
-    backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-
-  // ── 12. MOBILE NAVIGATION TOGGLE ─────────────────────────────
-  const mobileToggle = document.getElementById("mobile-toggle");
-  const navLinks = document.getElementById("nav-links");
-  if (mobileToggle && navLinks) {
-    mobileToggle.addEventListener("click", () => {
-      navLinks.classList.toggle("open");
-    });
-
-    navLinks.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-      });
-    });
-  }
-
-  // ── 13. ACTIVE LINK SCROLL SPY ───────────────────────────────
-  const sections = document.querySelectorAll("section[id]");
-  const navAnchorElements = document.querySelectorAll(".nav-link");
-
-  const spyObserver = new IntersectionObserver((entries) => {
-    const visibleSection = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-    if (!visibleSection) return;
-
-    navAnchorElements.forEach((anchor) => {
-      const href = anchor.getAttribute("href");
-      anchor.classList.toggle("active", href === `#${visibleSection.target.id}`);
-    });
-  }, { rootMargin: "-30% 0px -50% 0px", threshold: [0, 0.2, 0.5] });
-
-  sections.forEach((s) => spyObserver.observe(s));
-
-  // ── 14. LIGHTBOX MODAL FOR GALLERY IMAGES ────────────────────
-  const lightboxModal = document.getElementById("lightbox-modal");
-  const lightboxImg = document.getElementById("lightbox-img");
-  const lightboxCaption = document.getElementById("lightbox-caption");
-  const lightboxClose = document.getElementById("lightbox-close");
-  const lightboxBackdrop = document.getElementById("lightbox-backdrop");
-
-  const openLightbox = (src, caption) => {
-    if (!lightboxModal || !lightboxImg) return;
-    lightboxImg.src = src;
-    if (lightboxCaption) lightboxCaption.textContent = caption || "";
-    lightboxModal.classList.add("open");
-    lightboxModal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-  };
-
-  const closeLightbox = () => {
-    if (!lightboxModal) return;
-    lightboxModal.classList.remove("open");
-    lightboxModal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-  };
-
-  if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
-  if (lightboxBackdrop) lightboxBackdrop.addEventListener("click", closeLightbox);
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && lightboxModal && lightboxModal.classList.contains("open")) {
-      closeLightbox();
     }
   });
+};
 
-  document.querySelectorAll(".nex26-gallery-main img, .nex26-gallery-thumb img").forEach((img) => {
-    img.style.cursor = "zoom-in";
-    img.addEventListener("click", () => {
-      openLightbox(img.src, img.alt);
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("reveal-active");
+        observer.unobserve(entry.target);
+      }
     });
+  }, {
+    rootMargin: "150px 0px 100px 0px",
+    threshold: 0.01
   });
 
-  document.querySelectorAll(".view-photo-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      openLightbox(btn.dataset.img, btn.dataset.caption);
-    });
-  });
+  revealElements.forEach((el) => revealObserver.observe(el));
 
-  // ── 15. TOAST NOTIFICATION FOR COPY ACTIONS ───────────────────
-  const toast = document.getElementById("toast-notification");
-  const toastMessage = document.getElementById("toast-message");
-  let toastTimer = null;
+  // Immediate, scroll-bound, and staggered safety fallbacks to guarantee no content stays invisible
+  activateVisibleElements();
+  window.addEventListener("scroll", activateVisibleElements, { passive: true });
+  setTimeout(activateVisibleElements, 200);
+  setTimeout(activateVisibleElements, 600);
+} else {
+  revealElements.forEach((el) => el.classList.add("reveal-active"));
+}
 
-  const showToast = (message) => {
-    if (!toast) return;
-    if (toastMessage) toastMessage.textContent = message;
-    toast.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => {
-      toast.classList.remove("show");
-    }, 2800);
+// ── 11. FLOATING BACK TO TOP + CIRCULAR SCROLL PROGRESS ───────
+const backToTopBtn = document.getElementById("back-to-top");
+const progressCircle = document.getElementById("progress-circle");
+const circumference = 2 * Math.PI * 19; // ~119.38
+
+if (backToTopBtn && progressCircle) {
+  const updateScrollProgress = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+
+    if (scrollTop > 280) {
+      backToTopBtn.classList.add("visible");
+    } else {
+      backToTopBtn.classList.remove("visible");
+    }
+
+    const offset = circumference - progress * circumference;
+    progressCircle.style.strokeDashoffset = Math.max(0, offset);
   };
 
-  // ── 16. CONTACT FORM & EMAIL ACTION ENGINE ────────────────────
-  const recipientEmail = "khoihn.ce190080@gmail.com";
-  const contactForm = document.getElementById("contact-form");
-  const contactStatusMsg = document.getElementById("contact-status-msg");
-  const openGmailBtn = document.getElementById("open-gmail-btn");
-  const copyEmailBtn = document.getElementById("copy-email-btn");
+  window.addEventListener("scroll", updateScrollProgress, { passive: true });
+  updateScrollProgress();
 
-  if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
 
-      const nameInput = document.getElementById("contact-name");
-      const emailInput = document.getElementById("contact-email");
-      const subjectInput = document.getElementById("contact-subject");
-      const messageInput = document.getElementById("contact-message");
+// ── 12. MOBILE NAVIGATION TOGGLE ─────────────────────────────
+const mobileToggle = document.getElementById("mobile-toggle");
+const navLinks = document.getElementById("nav-links");
+if (mobileToggle && navLinks) {
+  mobileToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+  });
 
-      const name = nameInput ? nameInput.value.trim() : "";
-      const senderEmail = emailInput ? emailInput.value.trim() : "";
-      const subject = subjectInput && subjectInput.value.trim()
-        ? subjectInput.value.trim()
-        : `[Portfolio Inquiry] Message from ${name || "Visitor"}`;
-      const message = messageInput ? messageInput.value.trim() : "";
-
-      // Build structured email body
-      const bodyLines = [];
-      if (message) {
-        bodyLines.push(message);
-        bodyLines.push("");
-      }
-      bodyLines.push("──────────");
-      bodyLines.push(`Sender: ${name || "(Name not provided)"}`);
-      if (senderEmail) bodyLines.push(`Contact Email: ${senderEmail}`);
-      bodyLines.push("Sent via Hà Nhựt Khôi's Portfolio Website");
-
-      const fullBody = bodyLines.join("\n");
-
-      // 1. Direct Web Gmail Compose URL (100% reliable on Chrome, Edge, Safari, Firefox)
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipientEmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
-
-      // 2. Native mailto link for desktop clients
-      const mailtoUrl = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
-
-      // Auto-copy full draft to clipboard as backup
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(
-          `To: ${recipientEmail}\nSubject: ${subject}\n\n${fullBody}`
-        ).catch(() => { });
-      }
-
-      // Try opening Gmail Web compose
-      const newTab = window.open(gmailUrl, "_blank");
-      if (!newTab || newTab.closed || typeof newTab.closed === "undefined") {
-        // If popup blocked, fallback to mailto:
-        window.location.href = mailtoUrl;
-      }
-
-      // Display clean success status on the form
-      if (contactStatusMsg) {
-        contactStatusMsg.className = "contact-status-msg success";
-        contactStatusMsg.innerHTML = `✓ Opened email composer to <strong>${recipientEmail}</strong> (message draft has also been copied to your clipboard)!`;
-      }
-
-      showToast("✓ Opening Gmail compose to " + recipientEmail);
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
     });
-  }
+  });
+}
 
-  // Quick Action 1: Open Gmail Web directly
-  if (openGmailBtn) {
-    openGmailBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const defaultSubject = "[Portfolio Inquiry] Academic & Professional Collaboration";
-      const defaultBody = "Dear Hà Nhựt Khôi,\n\nI am contacting you through your portfolio website regarding:\n";
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipientEmail)}&su=${encodeURIComponent(defaultSubject)}&body=${encodeURIComponent(defaultBody)}`;
-      window.open(gmailUrl, "_blank");
-      showToast("✓ Opening Gmail Web to " + recipientEmail);
-    });
-  }
+// ── 13. ACTIVE LINK SCROLL SPY ───────────────────────────────
+const sections = document.querySelectorAll("section[id]");
+const navAnchorElements = document.querySelectorAll(".nav-link");
 
-  // Quick Action 2: 1-click Copy Email
-  if (copyEmailBtn) {
-    copyEmailBtn.addEventListener("click", () => {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(recipientEmail).then(() => {
-          showToast("✓ Email copied to clipboard: " + recipientEmail);
-        });
-      } else {
-        showToast("Email: " + recipientEmail);
-      }
-    });
+const spyObserver = new IntersectionObserver((entries) => {
+  const visibleSection = entries
+    .filter((entry) => entry.isIntersecting)
+    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+  if (!visibleSection) return;
+
+  navAnchorElements.forEach((anchor) => {
+    const href = anchor.getAttribute("href");
+    anchor.classList.toggle("active", href === `#${visibleSection.target.id}`);
+  });
+}, { rootMargin: "-30% 0px -50% 0px", threshold: [0, 0.2, 0.5] });
+
+sections.forEach((s) => spyObserver.observe(s));
+
+// ── 14. LIGHTBOX MODAL FOR GALLERY IMAGES ────────────────────
+const lightboxModal = document.getElementById("lightbox-modal");
+const lightboxImg = document.getElementById("lightbox-img");
+const lightboxCaption = document.getElementById("lightbox-caption");
+const lightboxClose = document.getElementById("lightbox-close");
+const lightboxBackdrop = document.getElementById("lightbox-backdrop");
+
+const openLightbox = (src, caption) => {
+  if (!lightboxModal || !lightboxImg) return;
+  lightboxImg.src = src;
+  if (lightboxCaption) lightboxCaption.textContent = caption || "";
+  lightboxModal.classList.add("open");
+  lightboxModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+};
+
+const closeLightbox = () => {
+  if (!lightboxModal) return;
+  lightboxModal.classList.remove("open");
+  lightboxModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+};
+
+if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
+if (lightboxBackdrop) lightboxBackdrop.addEventListener("click", closeLightbox);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && lightboxModal && lightboxModal.classList.contains("open")) {
+    closeLightbox();
   }
+});
+
+document.querySelectorAll(".nex26-gallery-main img, .nex26-gallery-thumb img").forEach((img) => {
+  img.style.cursor = "zoom-in";
+  img.addEventListener("click", () => {
+    openLightbox(img.src, img.alt);
+  });
+});
+
+document.querySelectorAll(".view-photo-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    openLightbox(btn.dataset.img, btn.dataset.caption);
+  });
+});
+
+// ── 15. TOAST NOTIFICATION FOR COPY ACTIONS ───────────────────
+const toast = document.getElementById("toast-notification");
+const toastMessage = document.getElementById("toast-message");
+let toastTimer = null;
+
+const showToast = (message) => {
+  if (!toast) return;
+  if (toastMessage) toastMessage.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2800);
+};
+
+// ── 16. CONTACT FORM & EMAIL ACTION ENGINE ────────────────────
+const recipientEmail = "khoihn.ce190080@gmail.com";
+const contactForm = document.getElementById("contact-form");
+const contactStatusMsg = document.getElementById("contact-status-msg");
+const openGmailBtn = document.getElementById("open-gmail-btn");
+const copyEmailBtn = document.getElementById("copy-email-btn");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const nameInput = document.getElementById("contact-name");
+    const emailInput = document.getElementById("contact-email");
+    const subjectInput = document.getElementById("contact-subject");
+    const messageInput = document.getElementById("contact-message");
+
+    const name = nameInput ? nameInput.value.trim() : "";
+    const senderEmail = emailInput ? emailInput.value.trim() : "";
+    const subject = subjectInput && subjectInput.value.trim()
+      ? subjectInput.value.trim()
+      : `[Portfolio Inquiry] Message from ${name || "Visitor"}`;
+    const message = messageInput ? messageInput.value.trim() : "";
+
+    // Build structured email body
+    const bodyLines = [];
+    if (message) {
+      bodyLines.push(message);
+      bodyLines.push("");
+    }
+    bodyLines.push("──────────");
+    bodyLines.push(`Sender: ${name || "(Name not provided)"}`);
+    if (senderEmail) bodyLines.push(`Contact Email: ${senderEmail}`);
+    bodyLines.push("Sent via Hà Nhựt Khôi's Portfolio Website");
+
+    const fullBody = bodyLines.join("\n");
+
+    // 1. Direct Web Gmail Compose URL (100% reliable on Chrome, Edge, Safari, Firefox)
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipientEmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
+
+    // 2. Native mailto link for desktop clients
+    const mailtoUrl = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
+
+    // Auto-copy full draft to clipboard as backup
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(
+        `To: ${recipientEmail}\nSubject: ${subject}\n\n${fullBody}`
+      ).catch(() => { });
+    }
+
+    // Try opening Gmail Web compose
+    const newTab = window.open(gmailUrl, "_blank");
+    if (!newTab || newTab.closed || typeof newTab.closed === "undefined") {
+      // If popup blocked, fallback to mailto:
+      window.location.href = mailtoUrl;
+    }
+
+    // Display clean success status on the form
+    if (contactStatusMsg) {
+      contactStatusMsg.className = "contact-status-msg success";
+      contactStatusMsg.innerHTML = `✓ Opened email composer to <strong>${recipientEmail}</strong> (message draft has also been copied to your clipboard)!`;
+    }
+
+    showToast("✓ Opening Gmail compose to " + recipientEmail);
+  });
+}
+
+// Quick Action 1: Open Gmail Web directly
+if (openGmailBtn) {
+  openGmailBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const defaultSubject = "[Portfolio Inquiry] Academic & Professional Collaboration";
+    const defaultBody = "Dear Hà Nhựt Khôi,\n\nI am contacting you through your portfolio website regarding:\n";
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipientEmail)}&su=${encodeURIComponent(defaultSubject)}&body=${encodeURIComponent(defaultBody)}`;
+    window.open(gmailUrl, "_blank");
+    showToast("✓ Opening Gmail Web to " + recipientEmail);
+  });
+}
+
+// Quick Action 2: 1-click Copy Email
+if (copyEmailBtn) {
+  copyEmailBtn.addEventListener("click", () => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(recipientEmail).then(() => {
+        showToast("✓ Email copied to clipboard: " + recipientEmail);
+      });
+    } else {
+      showToast("Email: " + recipientEmail);
+    }
+  });
+}
 
   // General mailto handler: right-click to copy, click copies + notifies
   document.querySelectorAll('a[href^="mailto:"]').forEach((mailLink) => {
@@ -896,4 +832,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-});
+}
+
+// Ensure execution whether DOMContentLoaded has already fired or is pending
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initPortfolio);
+} else {
+  initPortfolio();
+}
+
+

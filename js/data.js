@@ -1,5 +1,5 @@
 // ===== DATA.JS =====
-const cvData = {
+var cvData = {
   personal: {
     name: "Hà Nhựt Khôi",
     title: "Information Assurance",
