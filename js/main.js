@@ -141,8 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typewriterText) {
     const phrases = [
       "Find the signal in the noise.",
-      "Prospective Master's Researcher in Cybersecurity.",
-      "Targeting Global Korea Scholarship (GKS-G).",
       "Malware Analysis & Reverse Engineering.",
       "SOC Operations & Threat Hunting.",
       "Resilient Network Defense & Cryptography."
@@ -181,114 +179,280 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(typeLoop, typeDelay);
   }
 
-  // ── 7. AMBIENT CYBER PARTICLES CANVAS (60FPS) ─────────────────
+  // ── 7. METEOR SHOWER & SHOOTING STARS CANVAS (60FPS) ──────────
   const canvas = document.getElementById("hero-particles");
   const heroSection = document.getElementById("about");
   if (canvas && heroSection && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const ctx = canvas.getContext("2d");
-    let width = (canvas.width = heroSection.offsetWidth);
-    let height = (canvas.height = heroSection.offsetHeight);
+    let width = 0;
+    let height = 0;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
     let isHeroVisible = true;
 
-    const mouse = { x: null, y: null, radius: 140 };
-
-    const handleResize = () => {
+    const resizeCanvas = () => {
       if (!canvas || !heroSection) return;
-      width = canvas.width = heroSection.offsetWidth;
-      height = canvas.height = heroSection.offsetHeight;
+      width = heroSection.offsetWidth;
+      height = heroSection.offsetHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
-    window.addEventListener("resize", handleResize, { passive: true });
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas, { passive: true });
 
-    heroSection.addEventListener("mousemove", (e) => {
-      const rect = heroSection.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-    });
-
-    heroSection.addEventListener("mouseleave", () => {
-      mouse.x = null;
-      mouse.y = null;
-    });
-
-    // Particle pool
-    const particleCount = Math.min(42, Math.floor(width / 26));
-    const particles = [];
-    const colors = [
-      "rgba(47, 53, 92, 0.32)",  // Navy primary
-      "rgba(231, 71, 43, 0.32)", // Coral secondary
-      "rgba(5, 150, 105, 0.30)"  // Emerald
+    // Palette: Navy (#2f355c), Coral/Orange (#e7472b), Emerald (#059669), Electric Cyan (#0284c7), Indigo (#4f46e5)
+    const meteorPalettes = [
+      { r: 47, g: 53, b: 92 },    // Navy primary
+      { r: 231, g: 71, b: 43 },   // Coral / Orange secondary
+      { r: 5, g: 150, b: 105 },   // Emerald accent
+      { r: 2, g: 132, b: 199 },   // Electric Cyan
+      { r: 79, g: 70, b: 229 }    // Indigo
     ];
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
+    // 1. Ambient Background Twinkling Stars
+    const starCount = Math.min(60, Math.floor(width / 22));
+    const staticStars = [];
+    for (let i = 0; i < starCount; i++) {
+      staticStars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: Math.random() * 2 + 1.2,
-        color: colors[Math.floor(Math.random() * colors.length)]
+        radius: Math.random() * 1.5 + 0.8,
+        baseAlpha: Math.random() * 0.35 + 0.15,
+        twinkleSpeed: Math.random() * 0.03 + 0.012,
+        phase: Math.random() * Math.PI * 2,
+        color: meteorPalettes[Math.floor(Math.random() * meteorPalettes.length)],
+        isCross: Math.random() < 0.22
       });
     }
 
-    const animateParticles = () => {
+    // 2. Stardust Sparks Pool
+    const sparks = [];
+
+    // 3. Shooting Star (Sao Băng) Class
+    class ShootingStar {
+      constructor(initRandom = false) {
+        this.reset(initRandom);
+      }
+
+      reset(initRandom = false) {
+        // Trajectory angle: ~35-43 degrees (downwards to the right)
+        this.angle = (35 + Math.random() * 8) * (Math.PI / 180);
+        this.cos = Math.cos(this.angle);
+        this.sin = Math.sin(this.angle);
+
+        // Speed & length
+        this.speed = 11 + Math.random() * 13;
+        this.length = 130 + Math.random() * 170;
+        this.thickness = 1.4 + Math.random() * 1.5;
+
+        this.color = meteorPalettes[Math.floor(Math.random() * meteorPalettes.length)];
+
+        // Start position
+        if (initRandom) {
+          this.x = Math.random() * (width + 200) - 100;
+          this.y = Math.random() * (height + 200) - 100;
+        } else {
+          // Spawn along top edge or upper-left edge
+          if (Math.random() < 0.65) {
+            this.x = Math.random() * (width * 1.1) - 150;
+            this.y = -50;
+          } else {
+            this.x = -60;
+            this.y = Math.random() * (height * 0.65) - 30;
+          }
+        }
+
+        this.progress = 0;
+        this.lifetime = 45 + Math.random() * 55; // frames
+        this.maxOpacity = 0.7 + Math.random() * 0.3;
+        this.opacity = 0;
+        this.delay = initRandom ? Math.floor(Math.random() * 90) : Math.floor(Math.random() * 110);
+        this.active = initRandom ? Math.random() < 0.6 : false;
+      }
+
+      update() {
+        if (!this.active) {
+          this.delay--;
+          if (this.delay <= 0) {
+            this.active = true;
+          }
+          return;
+        }
+
+        this.x += this.cos * this.speed;
+        this.y += this.sin * this.speed;
+        this.progress++;
+
+        const ratio = this.progress / this.lifetime;
+        if (ratio < 0.22) {
+          this.opacity = (ratio / 0.22) * this.maxOpacity;
+        } else if (ratio > 0.65) {
+          this.opacity = (1 - (ratio - 0.65) / 0.35) * this.maxOpacity;
+        } else {
+          this.opacity = this.maxOpacity;
+        }
+
+        // Spawn occasional trailing stardust
+        if (this.opacity > 0.4 && Math.random() < 0.25 && sparks.length < 50) {
+          sparks.push({
+            x: this.x - this.cos * (Math.random() * 25),
+            y: this.y - this.sin * (Math.random() * 25),
+            vx: (Math.random() - 0.5) * 0.8,
+            vy: (Math.random() - 0.5) * 0.8,
+            color: this.color,
+            alpha: this.opacity * 0.75,
+            size: Math.random() * 1.6 + 0.8
+          });
+        }
+
+        if (this.progress >= this.lifetime || this.x > width + 260 || this.y > height + 260) {
+          this.reset(false);
+        }
+      }
+
+      draw() {
+        if (!this.active || this.opacity <= 0.01) return;
+
+        const tailX = this.x - this.cos * this.length;
+        const tailY = this.y - this.sin * this.length;
+
+        const { r, g, b } = this.color;
+
+        // Gradient for the meteor tail
+        const gradient = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+        gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${this.opacity})`);
+        gradient.addColorStop(0.35, `rgba(${r}, ${g}, ${b}, ${this.opacity * 0.5})`);
+        gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(tailX, tailY);
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = this.thickness;
+        ctx.lineCap = "round";
+        ctx.stroke();
+
+        // Glowing meteor head
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.thickness * 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${Math.min(1, this.opacity * 1.35)})`;
+        ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.75)`;
+        ctx.shadowBlur = 9;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // Create a pool of 6 shooting stars
+    const shootingStars = Array.from({ length: 6 }, () => new ShootingStar(true));
+
+    // Interactive Trigger: Cursor movement generates subtle cosmic dust; click triggers a streak
+    let lastSpawnTime = 0;
+    heroSection.addEventListener("mousemove", (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      const now = performance.now();
+      if (now - lastSpawnTime > 75 && sparks.length < 50) {
+        lastSpawnTime = now;
+        const color = meteorPalettes[Math.floor(Math.random() * meteorPalettes.length)];
+        sparks.push({
+          x: mouseX + (Math.random() - 0.5) * 14,
+          y: mouseY + (Math.random() - 0.5) * 14,
+          vx: (Math.random() - 0.5) * 1.2,
+          vy: Math.random() * 0.8 + 0.3,
+          color: color,
+          alpha: 0.65,
+          size: Math.random() * 1.8 + 1
+        });
+      }
+    });
+
+    // Click on Hero triggers a bright vibrant shooting star!
+    heroSection.addEventListener("click", (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      const star = shootingStars[Math.floor(Math.random() * shootingStars.length)];
+      star.color = meteorPalettes[1]; // Radiant coral/orange
+      star.speed = 18;
+      star.length = 240;
+      star.x = clickX - 120;
+      star.y = clickY - 120;
+      star.active = true;
+      star.delay = 0;
+      star.progress = 0;
+      star.maxOpacity = 0.95;
+    });
+
+    // Animation Loop (60 FPS)
+    const animateMeteors = () => {
       if (!isHeroVisible) {
-        requestAnimationFrame(animateParticles);
+        requestAnimationFrame(animateMeteors);
         return;
       }
 
       ctx.clearRect(0, 0, width, height);
 
-      // Connect particles
-      for (let i = 0; i < particles.length; i++) {
-        const p1 = particles[i];
+      // 1. Draw Twinkling Ambient Stars
+      for (let i = 0; i < staticStars.length; i++) {
+        const star = staticStars[i];
+        star.phase += star.twinkleSpeed;
+        const currentAlpha = star.baseAlpha + Math.sin(star.phase) * (star.baseAlpha * 0.7);
+        const { r, g, b } = star.color;
 
-        p1.x += p1.vx;
-        p1.y += p1.vy;
-
-        if (p1.x < 0 || p1.x > width) p1.vx *= -1;
-        if (p1.y < 0 || p1.y > height) p1.vy *= -1;
-
-        // Mouse attraction/repulsion
-        if (mouse.x !== null && mouse.y !== null) {
-          const dx = mouse.x - p1.x;
-          const dy = mouse.y - p1.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < mouse.radius) {
-            const force = (mouse.radius - dist) / mouse.radius;
-            p1.x -= (dx / dist) * force * 1.4;
-            p1.y -= (dy / dist) * force * 1.4;
-
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = `rgba(231, 71, 43, ${0.16 * (1 - dist / mouse.radius)})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          }
-        }
-
-        // Draw dot
         ctx.beginPath();
-        ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p1.color;
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${Math.max(0.05, currentAlpha)})`;
         ctx.fill();
 
-        // Connect with nearby neighbors
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
-          if (dist < 110) {
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(47, 53, 92, ${0.12 * (1 - dist / 110)})`;
-            ctx.lineWidth = 0.7;
-            ctx.stroke();
-          }
+        // 4-ray glint on brighter stars
+        if (star.isCross && currentAlpha > 0.45) {
+          ctx.save();
+          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${currentAlpha * 0.55})`;
+          ctx.lineWidth = 0.6;
+          const glintLen = star.radius * 2.8;
+          ctx.beginPath();
+          ctx.moveTo(star.x - glintLen, star.y);
+          ctx.lineTo(star.x + glintLen, star.y);
+          ctx.moveTo(star.x, star.y - glintLen);
+          ctx.lineTo(star.x, star.y + glintLen);
+          ctx.stroke();
+          ctx.restore();
         }
       }
 
-      requestAnimationFrame(animateParticles);
+      // 2. Draw & Update Trailing Stardust Sparks
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const s = sparks[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.alpha -= 0.022;
+
+        if (s.alpha <= 0) {
+          sparks.splice(i, 1);
+          continue;
+        }
+
+        const { r, g, b } = s.color;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${s.alpha})`;
+        ctx.fill();
+      }
+
+      // 3. Draw & Update Shooting Stars (Sao Băng)
+      for (let i = 0; i < shootingStars.length; i++) {
+        const star = shootingStars[i];
+        star.update();
+        star.draw();
+      }
+
+      requestAnimationFrame(animateMeteors);
     };
 
     const heroObserver = new IntersectionObserver(([entry]) => {
@@ -296,7 +460,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { threshold: 0.05 });
     heroObserver.observe(heroSection);
 
-    animateParticles();
+    animateMeteors();
   }
 
   // ── 8. HERO PORTRAIT 3D MOUSE PARALLAX TILT ───────────────────
@@ -566,7 +730,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(
           `To: ${recipientEmail}\nSubject: ${subject}\n\n${fullBody}`
-        ).catch(() => {});
+        ).catch(() => { });
       }
 
       // Try opening Gmail Web compose
