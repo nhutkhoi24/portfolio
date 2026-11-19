@@ -141,10 +141,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typewriterText) {
     const phrases = [
       "Find the signal in the noise.",
-      "SOC Operations & Threat Hunting.",
+      "Prospective Master's Researcher in Cybersecurity.",
+      "Targeting Global Korea Scholarship (GKS-G).",
       "Malware Analysis & Reverse Engineering.",
-      "Pentest Automation & Network Defense.",
-      "Next-Gen Startup Builder (Sổ Ơi)."
+      "SOC Operations & Threat Hunting.",
+      "Resilient Network Defense & Cryptography."
     ];
 
     let phraseIndex = 0;
@@ -374,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ── 10. SCROLL REVEAL (INTERSECTION OBSERVER) ─────────────────
-  document.querySelectorAll(".section-kicker, .section-title, .section-subtitle, .nex26-feature-card, .contact-item, .contact-box").forEach((el) => {
+  document.querySelectorAll(".section-kicker, .section-title, .section-subtitle, .nex26-feature-card, .contact-item, .contact-box, .academic-overview-card, .pillar-card, .hero-stats-bar").forEach((el) => {
     el.classList.add("reveal-init");
   });
 
@@ -539,7 +540,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const senderEmail = emailInput ? emailInput.value.trim() : "";
       const subject = subjectInput && subjectInput.value.trim()
         ? subjectInput.value.trim()
-        : `[Portfolio Contact] Lời nhắn từ ${name || "Khách truy cập"}`;
+        : `[Portfolio Inquiry] Message from ${name || "Visitor"}`;
       const message = messageInput ? messageInput.value.trim() : "";
 
       // Build structured email body
@@ -549,9 +550,9 @@ document.addEventListener("DOMContentLoaded", () => {
         bodyLines.push("");
       }
       bodyLines.push("──────────");
-      bodyLines.push(`Người gửi: ${name || "(Chưa nhập tên)"}`);
-      if (senderEmail) bodyLines.push(`Email liên hệ: ${senderEmail}`);
-      bodyLines.push("Gửi từ trang Portfolio của Hà Nhựt Khôi");
+      bodyLines.push(`Sender: ${name || "(Name not provided)"}`);
+      if (senderEmail) bodyLines.push(`Contact Email: ${senderEmail}`);
+      bodyLines.push("Sent via Hà Nhựt Khôi's Portfolio Website");
 
       const fullBody = bodyLines.join("\n");
 
@@ -578,10 +579,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // Display clean success status on the form
       if (contactStatusMsg) {
         contactStatusMsg.className = "contact-status-msg success";
-        contactStatusMsg.innerHTML = `✓ Đã mở trình soạn thư gửi tới <strong>${recipientEmail}</strong> (đồng thời đã copy nội dung tin nhắn vào clipboard của bạn)!`;
+        contactStatusMsg.innerHTML = `✓ Opened email composer to <strong>${recipientEmail}</strong> (message draft has also been copied to your clipboard)!`;
       }
 
-      showToast("✓ Đang mở Gmail gửi tới " + recipientEmail);
+      showToast("✓ Opening Gmail compose to " + recipientEmail);
     });
   }
 
@@ -589,11 +590,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (openGmailBtn) {
     openGmailBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      const defaultSubject = "[Portfolio] Trao đổi và kết nối công việc";
-      const defaultBody = "Chào Hà Nhựt Khôi,\n\nMình liên hệ qua trang Portfolio của bạn:\n";
+      const defaultSubject = "[Portfolio Inquiry] Academic & Professional Collaboration";
+      const defaultBody = "Dear Hà Nhựt Khôi,\n\nI am contacting you through your portfolio website regarding:\n";
       const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipientEmail)}&su=${encodeURIComponent(defaultSubject)}&body=${encodeURIComponent(defaultBody)}`;
       window.open(gmailUrl, "_blank");
-      showToast("✓ Đã mở Gmail Web gửi tới " + recipientEmail);
+      showToast("✓ Opening Gmail Web to " + recipientEmail);
     });
   }
 
@@ -602,7 +603,7 @@ document.addEventListener("DOMContentLoaded", () => {
     copyEmailBtn.addEventListener("click", () => {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(recipientEmail).then(() => {
-          showToast("✓ Đã copy email: " + recipientEmail);
+          showToast("✓ Email copied to clipboard: " + recipientEmail);
         });
       } else {
         showToast("Email: " + recipientEmail);
@@ -617,7 +618,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = mailLink.getAttribute("href").replace("mailto:", "").split("?")[0];
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(email).then(() => {
-          showToast("✓ Đã copy email: " + email);
+          showToast("✓ Email copied to clipboard: " + email);
         });
       }
     });
