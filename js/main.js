@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(typeLoop, typeDelay);
   }
 
-  // ── 7. METEOR SHOWER & SHOOTING STARS CANVAS (60FPS) ──────────
+  // ── 7. SLOW-MOTION WHITE SHOOTING STARS CANVAS (60FPS) ────────
   const canvas = document.getElementById("hero-particles");
   const heroSection = document.getElementById("about");
   if (canvas && heroSection && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -201,74 +201,62 @@ document.addEventListener("DOMContentLoaded", () => {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas, { passive: true });
 
-    // Palette: Navy (#2f355c), Coral/Orange (#e7472b), Emerald (#059669), Electric Cyan (#0284c7), Indigo (#4f46e5)
-    const meteorPalettes = [
-      { r: 47, g: 53, b: 92 },    // Navy primary
-      { r: 231, g: 71, b: 43 },   // Coral / Orange secondary
-      { r: 5, g: 150, b: 105 },   // Emerald accent
-      { r: 2, g: 132, b: 199 },   // Electric Cyan
-      { r: 79, g: 70, b: 229 }    // Indigo
-    ];
-
-    // 1. Ambient Background Twinkling Stars
-    const starCount = Math.min(60, Math.floor(width / 22));
+    // 1. Ambient Background Twinkling White Stars
+    const starCount = Math.min(65, Math.floor(width / 20));
     const staticStars = [];
     for (let i = 0; i < starCount; i++) {
       staticStars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 1.5 + 0.8,
-        baseAlpha: Math.random() * 0.35 + 0.15,
-        twinkleSpeed: Math.random() * 0.03 + 0.012,
+        radius: Math.random() * 1.5 + 0.9,
+        baseAlpha: Math.random() * 0.4 + 0.25,
+        twinkleSpeed: Math.random() * 0.025 + 0.008,
         phase: Math.random() * Math.PI * 2,
-        color: meteorPalettes[Math.floor(Math.random() * meteorPalettes.length)],
-        isCross: Math.random() < 0.22
+        isCross: Math.random() < 0.25
       });
     }
 
-    // 2. Stardust Sparks Pool
+    // 2. White Stardust Sparks Pool
     const sparks = [];
 
-    // 3. Shooting Star (Sao Băng) Class
+    // 3. Slow-Motion White Shooting Star (Sao Băng Trắng Bay Chậm)
     class ShootingStar {
       constructor(initRandom = false) {
         this.reset(initRandom);
       }
 
       reset(initRandom = false) {
-        // Trajectory angle: ~35-43 degrees (downwards to the right)
-        this.angle = (35 + Math.random() * 8) * (Math.PI / 180);
+        // Trajectory angle: ~35-42 degrees (gentle diagonal down-right)
+        this.angle = (35 + Math.random() * 7) * (Math.PI / 180);
         this.cos = Math.cos(this.angle);
         this.sin = Math.sin(this.angle);
 
-        // Speed & length
-        this.speed = 11 + Math.random() * 13;
-        this.length = 130 + Math.random() * 170;
-        this.thickness = 1.4 + Math.random() * 1.5;
+        // SLOW & GRACEFUL SPEED: 1.6 to 2.8 px/frame (dreamy slow glide)
+        this.speed = 1.6 + Math.random() * 1.3;
+        this.length = 160 + Math.random() * 180; // Long elegant tail
+        this.thickness = 1.6 + Math.random() * 1.2;
 
-        this.color = meteorPalettes[Math.floor(Math.random() * meteorPalettes.length)];
-
-        // Start position
+        // Position: staggered along top or left bounds
         if (initRandom) {
           this.x = Math.random() * (width + 200) - 100;
           this.y = Math.random() * (height + 200) - 100;
         } else {
-          // Spawn along top edge or upper-left edge
           if (Math.random() < 0.65) {
-            this.x = Math.random() * (width * 1.1) - 150;
-            this.y = -50;
+            this.x = Math.random() * (width * 1.1) - 120;
+            this.y = -60;
           } else {
-            this.x = -60;
-            this.y = Math.random() * (height * 0.65) - 30;
+            this.x = -80;
+            this.y = Math.random() * (height * 0.6) - 40;
           }
         }
 
         this.progress = 0;
-        this.lifetime = 45 + Math.random() * 55; // frames
-        this.maxOpacity = 0.7 + Math.random() * 0.3;
+        // Extended lifetime for slow drift (approx 3.5 - 6 seconds)
+        this.lifetime = 190 + Math.random() * 160;
+        this.maxOpacity = 0.85 + Math.random() * 0.15;
         this.opacity = 0;
-        this.delay = initRandom ? Math.floor(Math.random() * 90) : Math.floor(Math.random() * 110);
-        this.active = initRandom ? Math.random() < 0.6 : false;
+        this.delay = initRandom ? Math.floor(Math.random() * 120) : Math.floor(Math.random() * 160);
+        this.active = initRandom ? Math.random() < 0.65 : false;
       }
 
       update() {
@@ -285,28 +273,27 @@ document.addEventListener("DOMContentLoaded", () => {
         this.progress++;
 
         const ratio = this.progress / this.lifetime;
-        if (ratio < 0.22) {
-          this.opacity = (ratio / 0.22) * this.maxOpacity;
-        } else if (ratio > 0.65) {
-          this.opacity = (1 - (ratio - 0.65) / 0.35) * this.maxOpacity;
+        if (ratio < 0.2) {
+          this.opacity = (ratio / 0.2) * this.maxOpacity;
+        } else if (ratio > 0.7) {
+          this.opacity = (1 - (ratio - 0.7) / 0.3) * this.maxOpacity;
         } else {
           this.opacity = this.maxOpacity;
         }
 
-        // Spawn occasional trailing stardust
-        if (this.opacity > 0.4 && Math.random() < 0.25 && sparks.length < 50) {
+        // Spawn occasional slow floating white spark
+        if (this.opacity > 0.45 && Math.random() < 0.18 && sparks.length < 55) {
           sparks.push({
             x: this.x - this.cos * (Math.random() * 25),
             y: this.y - this.sin * (Math.random() * 25),
-            vx: (Math.random() - 0.5) * 0.8,
-            vy: (Math.random() - 0.5) * 0.8,
-            color: this.color,
-            alpha: this.opacity * 0.75,
-            size: Math.random() * 1.6 + 0.8
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: Math.random() * 0.3 + 0.1,
+            alpha: this.opacity * 0.8,
+            size: Math.random() * 1.5 + 0.8
           });
         }
 
-        if (this.progress >= this.lifetime || this.x > width + 260 || this.y > height + 260) {
+        if (this.progress >= this.lifetime || this.x > width + 300 || this.y > height + 300) {
           this.reset(false);
         }
       }
@@ -317,38 +304,68 @@ document.addEventListener("DOMContentLoaded", () => {
         const tailX = this.x - this.cos * this.length;
         const tailY = this.y - this.sin * this.length;
 
-        const { r, g, b } = this.color;
-
-        // Gradient for the meteor tail
-        const gradient = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
-        gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${this.opacity})`);
-        gradient.addColorStop(0.35, `rgba(${r}, ${g}, ${b}, ${this.opacity * 0.5})`);
-        gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
-
         ctx.save();
+
+        // 1. Subtle soft ambient shadow for contrast against #f7f5f1 background
+        const outerGrad = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+        outerGrad.addColorStop(0, `rgba(47, 53, 92, ${this.opacity * 0.25})`);
+        outerGrad.addColorStop(0.35, `rgba(47, 53, 92, ${this.opacity * 0.1})`);
+        outerGrad.addColorStop(1, `rgba(47, 53, 92, 0)`);
+
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(tailX, tailY);
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = this.thickness;
+        ctx.strokeStyle = outerGrad;
+        ctx.lineWidth = this.thickness + 2.4;
         ctx.lineCap = "round";
         ctx.stroke();
 
-        // Glowing meteor head
+        // 2. Pure luminous white streak
+        const whiteGrad = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+        whiteGrad.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
+        whiteGrad.addColorStop(0.25, `rgba(255, 255, 255, ${this.opacity * 0.85})`);
+        whiteGrad.addColorStop(0.6, `rgba(255, 255, 255, ${this.opacity * 0.4})`);
+        whiteGrad.addColorStop(1, `rgba(255, 255, 255, 0)`);
+
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.thickness * 1.2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${Math.min(1, this.opacity * 1.35)})`;
-        ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.75)`;
-        ctx.shadowBlur = 9;
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(tailX, tailY);
+        ctx.strokeStyle = whiteGrad;
+        ctx.lineWidth = this.thickness;
+        ctx.lineCap = "round";
+        ctx.shadowColor = `rgba(255, 255, 255, ${this.opacity * 0.9})`;
+        ctx.shadowBlur = 6;
+        ctx.stroke();
+
+        // 3. Glowing White Meteor Head
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.thickness * 1.3, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, this.opacity * 1.4)})`;
+        ctx.shadowColor = "rgba(255, 255, 255, 1)";
+        ctx.shadowBlur = 10;
         ctx.fill();
+
+        // 4. Ethereal 4-point cross glint on the head
+        if (this.opacity > 0.35) {
+          ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity * 0.95})`;
+          ctx.lineWidth = 0.9;
+          const glint = this.thickness * 2.8;
+          ctx.beginPath();
+          ctx.moveTo(this.x - glint, this.y);
+          ctx.lineTo(this.x + glint, this.y);
+          ctx.moveTo(this.x, this.y - glint);
+          ctx.lineTo(this.x, this.y + glint);
+          ctx.stroke();
+        }
+
         ctx.restore();
       }
     }
 
-    // Create a pool of 6 shooting stars
-    const shootingStars = Array.from({ length: 6 }, () => new ShootingStar(true));
+    // Pool of 5-6 slow gliding white shooting stars
+    const shootingStars = Array.from({ length: 5 }, () => new ShootingStar(true));
 
-    // Interactive Trigger: Cursor movement generates subtle cosmic dust; click triggers a streak
+    // Interactive Trigger: Cursor drops slow floating white sparkles; click triggers a slow white star
     let lastSpawnTime = 0;
     heroSection.addEventListener("mousemove", (e) => {
       const rect = heroSection.getBoundingClientRect();
@@ -356,37 +373,35 @@ document.addEventListener("DOMContentLoaded", () => {
       const mouseY = e.clientY - rect.top;
 
       const now = performance.now();
-      if (now - lastSpawnTime > 75 && sparks.length < 50) {
+      if (now - lastSpawnTime > 85 && sparks.length < 50) {
         lastSpawnTime = now;
-        const color = meteorPalettes[Math.floor(Math.random() * meteorPalettes.length)];
         sparks.push({
-          x: mouseX + (Math.random() - 0.5) * 14,
-          y: mouseY + (Math.random() - 0.5) * 14,
-          vx: (Math.random() - 0.5) * 1.2,
-          vy: Math.random() * 0.8 + 0.3,
-          color: color,
-          alpha: 0.65,
-          size: Math.random() * 1.8 + 1
+          x: mouseX + (Math.random() - 0.5) * 12,
+          y: mouseY + (Math.random() - 0.5) * 12,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: Math.random() * 0.4 + 0.15,
+          alpha: 0.75,
+          size: Math.random() * 1.6 + 1
         });
       }
     });
 
-    // Click on Hero triggers a bright vibrant shooting star!
+    // Click on Hero triggers a slow, bright white shooting star
     heroSection.addEventListener("click", (e) => {
       const rect = heroSection.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
       const clickY = e.clientY - rect.top;
 
       const star = shootingStars[Math.floor(Math.random() * shootingStars.length)];
-      star.color = meteorPalettes[1]; // Radiant coral/orange
-      star.speed = 18;
+      star.speed = 2.2; // Slow and serene
       star.length = 240;
       star.x = clickX - 120;
       star.y = clickY - 120;
       star.active = true;
       star.delay = 0;
       star.progress = 0;
-      star.maxOpacity = 0.95;
+      star.lifetime = 260;
+      star.maxOpacity = 1;
     });
 
     // Animation Loop (60 FPS)
@@ -398,54 +413,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Draw Twinkling Ambient Stars
+      // 1. Draw Twinkling Background White Stars
       for (let i = 0; i < staticStars.length; i++) {
         const star = staticStars[i];
         star.phase += star.twinkleSpeed;
-        const currentAlpha = star.baseAlpha + Math.sin(star.phase) * (star.baseAlpha * 0.7);
-        const { r, g, b } = star.color;
+        const currentAlpha = star.baseAlpha + Math.sin(star.phase) * (star.baseAlpha * 0.65);
+
+        ctx.save();
+        // Subtle soft shadow so white star pops on #f7f5f1
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius + 0.8, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(47, 53, 92, ${currentAlpha * 0.18})`;
+        ctx.fill();
 
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${Math.max(0.05, currentAlpha)})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, currentAlpha * 1.3)})`;
+        ctx.shadowColor = "rgba(255, 255, 255, 0.85)";
+        ctx.shadowBlur = 4;
         ctx.fill();
 
         // 4-ray glint on brighter stars
         if (star.isCross && currentAlpha > 0.45) {
-          ctx.save();
-          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${currentAlpha * 0.55})`;
-          ctx.lineWidth = 0.6;
-          const glintLen = star.radius * 2.8;
+          ctx.strokeStyle = `rgba(255, 255, 255, ${currentAlpha * 0.85})`;
+          ctx.lineWidth = 0.7;
+          const glintLen = star.radius * 2.6;
           ctx.beginPath();
           ctx.moveTo(star.x - glintLen, star.y);
           ctx.lineTo(star.x + glintLen, star.y);
           ctx.moveTo(star.x, star.y - glintLen);
           ctx.lineTo(star.x, star.y + glintLen);
           ctx.stroke();
-          ctx.restore();
         }
+        ctx.restore();
       }
 
-      // 2. Draw & Update Trailing Stardust Sparks
+      // 2. Draw & Update White Stardust Sparks
       for (let i = sparks.length - 1; i >= 0; i--) {
         const s = sparks[i];
         s.x += s.vx;
         s.y += s.vy;
-        s.alpha -= 0.022;
+        s.alpha -= 0.012; // Slow fade
 
         if (s.alpha <= 0) {
           sparks.splice(i, 1);
           continue;
         }
 
-        const { r, g, b } = s.color;
+        ctx.save();
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${s.alpha})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
+        ctx.shadowColor = `rgba(47, 53, 92, ${s.alpha * 0.3})`;
+        ctx.shadowBlur = 3;
         ctx.fill();
+        ctx.restore();
       }
 
-      // 3. Draw & Update Shooting Stars (Sao Băng)
+      // 3. Draw & Update Slow-Motion White Shooting Stars
       for (let i = 0; i < shootingStars.length; i++) {
         const star = shootingStars[i];
         star.update();
@@ -463,7 +488,91 @@ document.addEventListener("DOMContentLoaded", () => {
     animateMeteors();
   }
 
-  // ── 8. HERO PORTRAIT 3D MOUSE PARALLAX TILT ───────────────────
+    // Animation Loop (60 FPS)
+    const animateMeteors = () => {
+      if (!isHeroVisible) {
+        requestAnimationFrame(animateMeteors);
+        return;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+
+      // 1. Draw Twinkling Background White Stars
+      for (let i = 0; i < staticStars.length; i++) {
+        const star = staticStars[i];
+        star.phase += star.twinkleSpeed;
+        const currentAlpha = star.baseAlpha + Math.sin(star.phase) * (star.baseAlpha * 0.65);
+
+        ctx.save();
+        // Subtle soft shadow so white star pops on #f7f5f1
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius + 0.8, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(47, 53, 92, ${currentAlpha * 0.18})`;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, currentAlpha * 1.3)})`;
+        ctx.shadowColor = "rgba(255, 255, 255, 0.85)";
+        ctx.shadowBlur = 4;
+        ctx.fill();
+
+        // 4-ray glint on brighter stars
+        if (star.isCross && currentAlpha > 0.45) {
+          ctx.strokeStyle = `rgba(255, 255, 255, ${currentAlpha * 0.85})`;
+          ctx.lineWidth = 0.7;
+          const glintLen = star.radius * 2.6;
+          ctx.beginPath();
+          ctx.moveTo(star.x - glintLen, star.y);
+          ctx.lineTo(star.x + glintLen, star.y);
+          ctx.moveTo(star.x, star.y - glintLen);
+          ctx.lineTo(star.x, star.y + glintLen);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      // 2. Draw & Update White Stardust Sparks
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const s = sparks[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.alpha -= 0.012; // Slow fade
+
+        if (s.alpha <= 0) {
+          sparks.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
+        ctx.shadowColor = `rgba(47, 53, 92, ${s.alpha * 0.3})`;
+        ctx.shadowBlur = 3;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // 3. Draw & Update Slow-Motion White Shooting Stars
+      for (let i = 0; i < shootingStars.length; i++) {
+        const star = shootingStars[i];
+        star.update();
+        star.draw();
+      }
+
+      requestAnimationFrame(animateMeteors);
+    };
+
+    const heroObserver = new IntersectionObserver(([entry]) => {
+      isHeroVisible = entry.isIntersecting;
+    }, { threshold: 0.05 });
+    heroObserver.observe(heroSection);
+
+    animateMeteors();
+  }
+
+// ── 8. HERO PORTRAIT 3D MOUSE PARALLAX TILT ───────────────────
   const heroProfileImg = document.getElementById("hero-profile-img");
   if (heroSection && heroProfileImg && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     let targetRotateX = 0;
