@@ -2,13 +2,13 @@
 const cvData = {
   personal: {
     name: "Hà Nhựt Khôi",
-    title: "Information Assurance Scholar · Prospective Master's Researcher",
+    title: "Information Assurance",
     subtitle: "I turn security threats into actionable defenses.",
-    bio: "Hà Nhựt Khôi — Information Assurance undergraduate at FPT University Can Tho (GPA 7.722/10 · B+ / ~3.25/4.0). Prospective Master's researcher specializing in AI for Threat Detection, Malware Reverse Engineering, Autonomous SOC Operations, and Resilient Defense Networks in South Korea (Global Korea Scholarship - GKS-G Candidate).",
+    bio: "Hà Nhựt Khôi — Information Assurance undergraduate at FPT University Can Tho (GPA 3.25 / 4.0). Prospective Master's researcher specializing in AI for Threat Detection, Malware Reverse Engineering, Autonomous SOC Operations, and Resilient Defense Networks in South Korea (Global Korea Scholarship - GKS-G Candidate).",
     email: "khoihn.ce190080@gmail.com",
     phone: "079-257-7603",
     location: "Can Tho & Ca Mau, Vietnam",
-    gpa: "7.722 / 10.0 (B+ / ~3.25/4.0)",
+    gpa: "3.25 / 4.0",
     targetDegree: "Master of Science (M.S.) in Cybersecurity",
     scholarshipTarget: "Global Korea Scholarship (GKS-G)",
     github: "https://github.com/nhutkhoi24",
